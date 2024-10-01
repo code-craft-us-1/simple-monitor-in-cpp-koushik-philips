@@ -17,13 +17,13 @@ TEST(Monitor, IndividualVitalsOk) {
 
 TEST(Monitor, NotOkWhenAnyVitalIsOffRange) {
   // check combinations
-  ASSERT_FALSE(vitalsOk(99, 102, 70));      //  not-OK- 1 (temp_in_range,       pulse_NOT_in_range,     spo2_in_range)
-  ASSERT_FALSE(vitalsOk(103, 80, 94));      //  not-OK- 2 (temp_NOT_in_range,   pulse_in_range,         spo2_in_range)
-  ASSERT_FALSE(vitalsOk(98, 105, 94));      //  not-OK- 3 (temp_in_range,       pulse_NOT_in_range,     spo2_in_range)
-  ASSERT_FALSE(vitalsOk(98, 80, 70));       //  not-OK- 4 (temp_in_range,       pulse_in_range,         spo2_NOT_in_range)
-  ASSERT_FALSE(vitalsOk(103, 105, 94));     //  not-OK- 5 (temp_NOT_in_range,   pulse_NOT_in_range,     spo2_in_range)
-  ASSERT_FALSE(vitalsOk(103, 80, 70));      //  not-OK- 6 (temp_NOT_in_range,   pulse_in_range,         spo2_NOT_in_range)
-  ASSERT_FALSE(vitalsOk(98, 105, 70));      //  not-OK- 7 (temp_in_range,       pulse_NOT_in_range,     spo2_NOT_in_range)
-  ASSERT_FALSE(vitalsOk(103, 105, 70));     //  not-OK- 8 (temp_NOT_in_range,   pulse_NOT_in_range,     spo2_NOT_in_range)
-  ASSERT_TRUE(vitalsOk(98.1f, 70, 98));     //  OK    - 9 (temp_in_range,       pulse_in_range,         spo2_in_range)
+  ASSERT_FALSE(vitalsOk(99, 102, 70));      //  not-OK- 1 (T,P-out,S-out)
+  ASSERT_FALSE(vitalsOk(103, 80, 94));      //  not-OK- 2 (T-out,P,S)
+  ASSERT_FALSE(vitalsOk(98, 105, 94));      //  not-OK- 3 (T,P-out,S)
+  ASSERT_FALSE(vitalsOk(98, 80, 70));       //  not-OK- 4 (T,P,S-out)
+  ASSERT_FALSE(vitalsOk(103, 105, 94));     //  not-OK- 5 (T-out,P-out,S)
+  ASSERT_FALSE(vitalsOk(103, 80, 70));      //  not-OK- 6 (T-out,P,S-out)
+  ASSERT_FALSE(vitalsOk(98, 105, 70));      //  not-OK- 7 (T,P-out,S-out)
+  ASSERT_FALSE(vitalsOk(103, 105, 70));     //  not-OK- 8 (T-out,P-out,S-out)
+  ASSERT_TRUE(vitalsOk(98.1f, 70, 98));     //  OK    - 9 (T,P,S)
 }
