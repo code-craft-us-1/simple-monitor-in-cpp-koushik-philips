@@ -50,7 +50,7 @@ bool CheckSPO2Vital(float spo2) {
 
 int vitalsOk(float temperature, float pulseRate, float spo2) {
     if (CheckTemperatureVital(temperature) &&
-        CheckPulseRateVital(pulseRate) && 
+        CheckPulseRateVital(pulseRate) &&
         CheckSPO2Vital(spo2)) {
         return 1;
     }
