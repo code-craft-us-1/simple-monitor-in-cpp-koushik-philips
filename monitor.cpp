@@ -48,13 +48,8 @@ bool CheckSPO2Vital(float spo2) {
     return true;
 }
 
-bool CheckTemperatureAndPulseRate(float temperature, float pulseRate) {
-    if (CheckTemperatureVital(temperature) && CheckPulseRateVital(pulseRate)) {
-        return true;
-    }
-    return false;
-}
-
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-    return (CheckTemperatureVital(temperature) && CheckPulseRateVital(pulseRate) && CheckSPO2Vital(spo2));
+    return CheckTemperatureVital(temperature) &&
+           CheckPulseRateVital(pulseRate) &&
+           CheckSPO2Vital(spo2);
 }
