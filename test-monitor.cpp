@@ -1,7 +1,7 @@
 #include "./monitor.h"
 #include "gtest/gtest.h"
 
-TEST(Monitor, IndividualVitalsOk) {
+TEST(Monitor, IndividualVitalsCheck) {
     // Individual checks and boundary-conditions
     ASSERT_FALSE(CheckTemperatureVital(94));        // Low Temp
     ASSERT_TRUE(CheckTemperatureVital(95.0f));      // Ok Temp
