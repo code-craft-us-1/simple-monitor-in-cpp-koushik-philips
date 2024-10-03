@@ -3,36 +3,76 @@
 #include <thread>
 #include <chrono>
 #include <iostream>
-using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
+#include <limits>
+#include <functional>
+using std::cout;
+using std::flush;
+using std::this_thread::sleep_for;
+using std::chrono::seconds;
 
-int vitalsOk(float temperature, float pulseRate, float spo2) {
-  if (temperature > 102 || temperature < 95) {
-    cout << "Temperature is critical!\n";
+namespace {
+    constexpr float VITALS_MAX = std::numeric_limits<float>::max();
+    constexpr float VITALS_MIN = std::numeric_limits<float>::min();
+    constexpr float TEMP_LIMIT_HIGH = 102;
+    constexpr float TEMP_LIMIT_LOW = 95;
+    constexpr float PULSE_LIMIT_HIGH = 100;
+    constexpr float PULSE_LIMIT_LOW = 60;
+    constexpr float SPO2_LIMIT_LOW = 90;
+}
+
+void DisplayError(std::string error) {
+    cout << error;
     for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
+        cout << "\r* " << flush;
+        sleep_for(seconds(1));
+        cout << "\r *" << flush;
+        sleep_for(seconds(1));
     }
-    return 0;
-  } else if (pulseRate < 60 || pulseRate > 100) {
-    cout << "Pulse Rate is out of range!\n";
-    for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
+}
+enum class Operator {
+    LT,
+    LTEQ,
+    GT,
+    GTEQ
+};
+bool CompareFunc(float value, float limit, Operator type) {
+    switch (type) {
+    case (Operator::LT):
+        return value < limit;
+    case (Operator::GT):
+        return value > limit;
+    default:
+        return false;
     }
-    return 0;
-  } else if (spo2 < 90) {
-    cout << "Oxygen Saturation out of range!\n";
-    for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
+}
+
+using Func = std::function<bool(float, float, Operator)>;
+bool CheckVital(float value, std::string msg,
+                float low = VITALS_MIN, float high = VITALS_MAX,
+                Func f = CompareFunc,
+                Operator compareWithLow = Operator::LT,
+                Operator compareWithHigh = Operator::GT) {
+    if (f(value, low, compareWithLow) || f(value, high, compareWithHigh)) {
+        DisplayError(msg);
+        return false;
     }
-    return 0;
-  }
-  return 1;
+    return true;
+}
+
+bool CheckTemperatureVital(float temperature) {
+    return CheckVital(temperature, "Temperature is critical!\n",
+                      TEMP_LIMIT_LOW, TEMP_LIMIT_HIGH);
+}
+bool CheckPulseRateVital(float pulseRate) {
+    return CheckVital(pulseRate, "Pulse Rate is out of range!\n",
+                      PULSE_LIMIT_LOW, PULSE_LIMIT_HIGH);
+}
+bool CheckSPO2Vital(float spo2) {
+    return CheckVital(spo2, "Oxygen Saturation out of range!\n", SPO2_LIMIT_LOW);
+}
+
+bool vitalsOk(float temperature, float pulseRate, float spo2) {
+    return CheckTemperatureVital(temperature) &&
+           CheckPulseRateVital(pulseRate) &&
+           CheckSPO2Vital(spo2);
 }
