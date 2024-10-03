@@ -13,11 +13,11 @@ using std::chrono::seconds;
 namespace {
     constexpr float VITALS_MAX = std::numeric_limits<float>::max();
     constexpr float VITALS_MIN = std::numeric_limits<float>::min();
-    constexpr int TEMP_LIMIT_HIGH = 102;
-    constexpr int TEMP_LIMIT_LOW = 95;
-    constexpr int PULSE_LIMIT_HIGH = 100;
-    constexpr int PULSE_LIMIT_LOW = 60;
-    constexpr int SPO2_LIMIT_LOW = 90;
+    constexpr float TEMP_LIMIT_HIGH = 102;
+    constexpr float TEMP_LIMIT_LOW = 95;
+    constexpr float PULSE_LIMIT_HIGH = 100;
+    constexpr float PULSE_LIMIT_LOW = 60;
+    constexpr float SPO2_LIMIT_LOW = 90;
 }
 
 void DisplayError(std::string error) {
