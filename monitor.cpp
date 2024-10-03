@@ -48,7 +48,7 @@ bool CompareFunc(float value, float limit, Operator type) {
 
 using Func = std::function<bool(float, float, Operator)>;
 bool CheckVital(float value, std::string msg,
-                float low = VITALS_MIN, float high= VITALS_MAX,
+                float low = VITALS_MIN, float high = VITALS_MAX,
                 Func f = CompareFunc,
                 Operator compareWithLow = Operator::LT,
                 Operator compareWithHigh = Operator::GT) {
