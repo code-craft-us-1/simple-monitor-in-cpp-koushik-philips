@@ -29,8 +29,7 @@ void DisplayError(std::string error) {
         sleep_for(seconds(1));
     }
 }
-enum class Operator 
-{
+enum class Operator {
     LT,
     LTEQ,
     GT,
@@ -40,23 +39,19 @@ bool CompareFunc(float value, float limit, Operator type) {
     switch (type) {
     case (Operator::LT):
         return value < limit;
-    case (Operator::LTEQ):
-        return value <= limit;
     case (Operator::GT):
         return value > limit;
-    case (Operator::GTEQ):
-        return value >= limit;
     default:
         return false;
     }
 }
 
 using Func = std::function<bool(float, float, Operator)>;
-bool CheckVital(float value, std::string msg, 
-                float low= VITALS_MIN, float high= VITALS_MAX, 
-                Func f= CompareFunc, 
-                Operator compareWithLow = Operator::LT, 
-                Operator compareWithHigh= Operator::GT) {
+bool CheckVital(float value, std::string msg,
+                float low= VITALS_MIN, float high= VITALS_MAX,
+                Func f= CompareFunc,
+                Operator compareWithLow = Operator::LT,
+                Operator compareWithHigh = Operator::GT) {
     if (f(value, low, compareWithLow) || f(value, high, compareWithHigh)) {
         DisplayError(msg);
         return false;
