@@ -1,20 +1,45 @@
 #include "./monitor.h"
 #include "gtest/gtest.h"
 
-TEST(Monitor, IndividualVitalsCheck) {
-    // Individual checks and boundary-conditions
-    ASSERT_FALSE(CheckTemperatureVital(94));        // Low Temp
-    ASSERT_TRUE(CheckTemperatureVital(95.0f));      // Ok Temp
-    ASSERT_TRUE(CheckTemperatureVital(102));        // Ok Temp
-    ASSERT_FALSE(CheckTemperatureVital(103.5f));    // High Temp
-    ASSERT_FALSE(CheckPulseRateVital(59));          // Low Pulse
-    ASSERT_TRUE(CheckPulseRateVital(60));           // Ok Pulse
-    ASSERT_TRUE(CheckPulseRateVital(100));          // Ok Pulse
-    ASSERT_FALSE(CheckPulseRateVital(101));         // High Pulse
-    ASSERT_FALSE(CheckSPO2Vital(89));               // Low SPO2
-    ASSERT_TRUE(CheckSPO2Vital(90));                // Ok SPO2
-}
+// Temperature ranges = {95,96.53,100.47,102}
+// Pulse-rate ranges = {60, 61.5, 98.5, 100}
+// SpO2 ranges = {90, 91.5,98.5,100}
 
+TEST(Monitor, MonitorTemperature) {
+    // Individual checks and boundary-conditions
+    ASSERT_FALSE(CheckTemperatureVital(94));                    // Hypothermia
+    ASSERT_FALSE(CheckTemperatureVital(95.0f));                 // Near Hpothermia
+    ASSERT_FALSE(CheckTemperatureVital(96.53f));                // Near Hpothermia
+    ASSERT_TRUE(CheckTemperatureVital(96.54f));                 // Normal
+    ASSERT_TRUE(CheckTemperatureVital(100.47f));                // Normal
+    ASSERT_FALSE(CheckTemperatureVital(100.48f));               // Near Hyperthermia
+    ASSERT_FALSE(CheckTemperatureVital(102.0f));                // Near Hyperthermia
+    ASSERT_FALSE(CheckTemperatureVital(103.5f));                // Hyperthermia
+    ASSERT_TRUE(CheckTemperatureVital(37.f,"Celsius"));         // Normal
+    ASSERT_TRUE(CheckTemperatureVital(98.6f, "Fahrenheit"));    // Normal
+}
+TEST(Monitor, MonitorPulseRate) {
+    // Individual checks and boundary-conditions
+    ASSERT_FALSE(CheckPulseRateVital(59));                  // Bradycardia
+    ASSERT_FALSE(CheckPulseRateVital(60));                  // Near Bradycardia
+    ASSERT_FALSE(CheckPulseRateVital(61.5f));               // Near Bradycardia
+    ASSERT_TRUE(CheckPulseRateVital(61.54f));               // Normal
+    ASSERT_TRUE(CheckPulseRateVital(98.5f));                // Normal
+    ASSERT_FALSE(CheckPulseRateVital(98.6f));               // Near Tachycardia
+    ASSERT_FALSE(CheckPulseRateVital(100));                 // Near Tachycardia
+    ASSERT_FALSE(CheckPulseRateVital(101));                 // Tachycardia
+}
+TEST(Monitor, MonitorSpo2) {
+    // Individual checks and boundary-conditions
+    ASSERT_FALSE(CheckSPO2Vital(89));                       // Hypoaxemia
+    ASSERT_FALSE(CheckSPO2Vital(90));                       // Near Hypoaxemia
+    ASSERT_FALSE(CheckSPO2Vital(91.5f));                    // Near Hypoaxemia
+    ASSERT_TRUE(CheckSPO2Vital(91.6f));                     // Normal
+    ASSERT_TRUE(CheckSPO2Vital(98.5f));                     // Normal
+    ASSERT_FALSE(CheckSPO2Vital(98.6f));                    // Near Hyperoaxemia
+    ASSERT_FALSE(CheckSPO2Vital(100));                      // Near Hyperoaxemia
+    ASSERT_FALSE(CheckSPO2Vital(101));                      // Hyperoaxemia
+}
 TEST(Monitor, NotOkWhenAnyVitalIsOffRange) {
   // check combinations
   ASSERT_FALSE(vitalsOk(99, 102, 70));      //  not-OK- 1 (T,P-out,S-out)

@@ -1,78 +1,40 @@
 #include "./monitor.h"
-#include <assert.h>
-#include <thread>
-#include <chrono>
-#include <iostream>
-#include <limits>
-#include <functional>
-using std::cout;
-using std::flush;
-using std::this_thread::sleep_for;
-using std::chrono::seconds;
 
-namespace {
-    constexpr float VITALS_MAX = std::numeric_limits<float>::max();
-    constexpr float VITALS_MIN = std::numeric_limits<float>::min();
-    constexpr float TEMP_LIMIT_HIGH = 102;
-    constexpr float TEMP_LIMIT_LOW = 95;
-    constexpr float PULSE_LIMIT_HIGH = 100;
-    constexpr float PULSE_LIMIT_LOW = 60;
-    constexpr float SPO2_LIMIT_LOW = 90;
+bool checkVital(const Vital& vital) {
+    auto category = vital.getCategory();
+    auto msg = vital.getMessage(category);
+    vital.displayMessage(msg);
+    //vital.displayTransitionGraphics();
+    return vital.isVitalOk(category);
 }
 
-void DisplayError(std::string error) {
-    cout << error;
-    for (int i = 0; i < 6; i++) {
-        cout << "\r* " << flush;
-        sleep_for(seconds(1));
-        cout << "\r *" << flush;
-        sleep_for(seconds(1));
-    }
-}
-enum class Operator {
-    LT,
-    LTEQ,
-    GT,
-    GTEQ
-};
-bool CompareFunc(float value, float limit, Operator type) {
-    switch (type) {
-    case (Operator::LT):
-        return value < limit;
-    case (Operator::GT):
-        return value > limit;
-    default:
-        return false;
-    }
-}
-
-using Func = std::function<bool(float, float, Operator)>;
-bool CheckVital(float value, std::string msg,
-                float low = VITALS_MIN, float high = VITALS_MAX,
-                Func f = CompareFunc,
-                Operator compareWithLow = Operator::LT,
-                Operator compareWithHigh = Operator::GT) {
-    if (f(value, low, compareWithLow) || f(value, high, compareWithHigh)) {
-        DisplayError(msg);
-        return false;
-    }
-    return true;
-}
-
-bool CheckTemperatureVital(float temperature) {
-    return CheckVital(temperature, "Temperature is critical!\n",
-                      TEMP_LIMIT_LOW, TEMP_LIMIT_HIGH);
+bool CheckTemperatureVital(float temperature,std::string units) {
+    return checkVital(Temperature(temperature,units));
 }
 bool CheckPulseRateVital(float pulseRate) {
-    return CheckVital(pulseRate, "Pulse Rate is out of range!\n",
-                      PULSE_LIMIT_LOW, PULSE_LIMIT_HIGH);
+    return checkVital(PulseRate(pulseRate));
 }
 bool CheckSPO2Vital(float spo2) {
-    return CheckVital(spo2, "Oxygen Saturation out of range!\n", SPO2_LIMIT_LOW);
+    return checkVital(SPO2(spo2));
 }
 
 bool vitalsOk(float temperature, float pulseRate, float spo2) {
     return CheckTemperatureVital(temperature) &&
            CheckPulseRateVital(pulseRate) &&
            CheckSPO2Vital(spo2);
+}
+
+bool vitalsOk(Temperature temperature, PulseRate pulseRate, SPO2 spo2)
+{
+    return checkVital(temperature) &&
+           checkVital(pulseRate) && 
+           checkVital(spo2);
+}
+
+bool vitalsOk(std::vector<Vital> vitals) {
+    bool ret = true;
+    for(auto& item : vitals) {
+        ret = (ret && checkVital(item));
+    }
+    return ret;
 }
