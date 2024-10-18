@@ -1,3 +1,5 @@
+#include <set>
+#include <string>
 #include "./pulserate.h"
 
 using VitalConstants::PULSE_LIMIT_LOW;

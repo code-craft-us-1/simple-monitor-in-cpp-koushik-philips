@@ -1,3 +1,5 @@
+#include <set>
+#include <string>
 #include "./spo2.h"
 
 using VitalConstants::SPO2_LIMIT_LOW;

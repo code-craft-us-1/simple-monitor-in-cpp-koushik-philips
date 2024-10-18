@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <string>
 #include "./vital.h"
 
 using std::cout;
@@ -23,8 +24,7 @@ int Vital::getCategory() const {
     auto iter = std::lower_bound(levels.begin(), levels.end(), value);
     if (value == low) {
         return static_cast<int>(std::distance(levels.begin(), iter)) + 1;
-    }
-    else {
+    } else {
         return static_cast<int>(std::distance(levels.begin(), iter));
     }
 }
@@ -43,8 +43,7 @@ bool Vital::isVitalOk(int category) const {
     auto invalidCategories = collectInvalidCategories();
     if (invalidCategories.find(category) != invalidCategories.end()) {
         return false;
-    }
-    else {
+    } else {
         return true;
     }
 }

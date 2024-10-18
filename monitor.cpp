@@ -1,4 +1,5 @@
 #include "./monitor.h"
+#include <string>
 
 bool checkVital(const Vital& vital) {
     auto category = vital.getCategory();
@@ -7,7 +8,6 @@ bool checkVital(const Vital& vital) {
     vital.displayTransitionGraphics();
     return vital.isVitalOk(category);
 }
-
 bool CheckTemperatureVital(float temperature, std::string units) {
     return checkVital(Temperature(temperature, units));
 }
@@ -33,7 +33,7 @@ bool vitalsOk(Temperature temperature, PulseRate pulseRate, SPO2 spo2) {
 bool vitalsOk(std::vector<Vital> vitals) {
     bool ret = true;
     for( auto& item : vitals) {
-        ret = (ret && checkVital(item));
+        ret = ( ret && checkVital(item) );
     }
     return ret;
 }

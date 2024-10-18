@@ -1,3 +1,5 @@
+#include <set>
+#include <string>
 #include "./temperature.h"
 
 using VitalConstants::TEMP_LIMIT_LOW;
