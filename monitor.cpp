@@ -32,8 +32,8 @@ bool vitalsOk(Temperature temperature, PulseRate pulseRate, SPO2 spo2) {
 
 bool vitalsOk(std::vector<Vital> vitals) {
     bool ret = true;
-    for ( auto& item : vitals) {
-        ret = ( ret && checkVital(item) );
+    for ( auto& item : vitals ) {
+        ret = (ret && checkVital(item) );
     }
     return ret;
 }
