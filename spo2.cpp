@@ -1,4 +1,4 @@
-#include "spo2.h"
+#include "./spo2.h"
 
 using VitalConstants::SPO2_LIMIT_LOW;
 using VitalConstants::SPO2_LIMIT_HIGH;
@@ -6,8 +6,7 @@ using VitalConstants::TOLERANCE_PERCENT;
 
 SPO2::SPO2(float spo2) :
     Vital(SPO2_LIMIT_LOW, SPO2_LIMIT_HIGH,
-          TOLERANCE_PERCENT, spo2)
-{
+          TOLERANCE_PERCENT, spo2) {
     initLevels();
 }
 

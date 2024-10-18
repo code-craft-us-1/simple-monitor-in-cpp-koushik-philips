@@ -2,15 +2,14 @@
 #include <string>
 #include <vector>
 #include <set>
-#include "constants.h"
+#include "./constants.h"
 
 using VitalConstants::VITALS_MIN;
 using VitalConstants::VITALS_MAX;
 using VitalConstants::TOLERANCE_PERCENT;
 using Levels = std::vector<float>;
 
-struct Vital
-{
+struct Vital {
     const float low{ VITALS_MIN };
     const float high{ VITALS_MAX };
     const float tolerance{ TOLERANCE_PERCENT };

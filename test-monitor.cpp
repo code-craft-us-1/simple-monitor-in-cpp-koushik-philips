@@ -15,7 +15,7 @@ TEST(Monitor, MonitorTemperature) {
     ASSERT_FALSE(CheckTemperatureVital(100.48f));               // Near Hyperthermia
     ASSERT_FALSE(CheckTemperatureVital(102.0f));                // Near Hyperthermia
     ASSERT_FALSE(CheckTemperatureVital(103.5f));                // Hyperthermia
-    ASSERT_TRUE(CheckTemperatureVital(37.f,"Celsius"));         // Normal
+    ASSERT_TRUE(CheckTemperatureVital(37.f, "Celsius"));        // Normal
     ASSERT_TRUE(CheckTemperatureVital(98.6f, "Fahrenheit"));    // Normal
 }
 TEST(Monitor, MonitorPulseRate) {

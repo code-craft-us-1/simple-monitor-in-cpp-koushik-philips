@@ -1,7 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-#include "vital.h"
+#include "./vital.h"
 
 using std::cout;
 using std::flush;
@@ -11,12 +11,8 @@ using std::chrono::seconds;
 Vital::Vital(float lowLimit, float highLimit,
     float toleranceLimit, float vitalValue) :
     low(lowLimit), high(highLimit),
-    tolerance(toleranceLimit), value(vitalValue)
-{
-
-}
-void Vital::initLevels()
-{
+    tolerance(toleranceLimit), value(vitalValue) {}
+void Vital::initLevels() {
     // Keep levels in sorted order
     levels.push_back(low);
     levels.push_back(low + (tolerance * high) / 100);
