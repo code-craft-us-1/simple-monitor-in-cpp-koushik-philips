@@ -12,8 +12,8 @@ struct PulseRate : public Vital {
      NEAR_TACHY,
      TACHYCARDIA
   };
-public:
- explicit PulseRate(float pulserate);
- std::set<int> collectInvalidCategories() const override;
- std::string getMessage(int category) const override;
+ public:
+  explicit PulseRate(float pulserate);
+  std::set<int> collectInvalidCategories() const override;
+  std::string getMessage(int category) const override;
 };
