@@ -20,8 +20,8 @@ std::set<int> SPO2::collectInvalidCategories() const {
     return invalidCategoies;
 }
 std::string SPO2::getMessage(int category) const {
-    auto cat = static_cast<Category>(category);
-    switch (cat) {
+    auto spo2category = static_cast<Category>(category);
+    switch (spo2category) {
     case Category::HYPOAXEMIA:          return "Hypoaxemia : Oxygen Saturation out of range!\n";
     case Category::NEAR_HYPOAXEMIA:     return "Warning: Approaching hypoaxemia\n";
     case Category::NORMAL:              return "Normal Temperature\n";

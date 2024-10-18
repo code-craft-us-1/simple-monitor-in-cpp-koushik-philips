@@ -18,8 +18,8 @@ std::set<int> PulseRate::collectInvalidCategories() const {
     return invalidCategoies;
 }
 std::string PulseRate::getMessage(int category) const {
-    auto cat = static_cast<Category>(category);
-    switch (cat) {
+    auto pulseRateCategory = static_cast<Category>(category);
+    switch (pulseRateCategory) {
     case Category::BRADYCARDIA: return "Bradycardia : Pulse Rate is out of range!\n";
     case Category::NEAR_BRADY:  return "Warning: Approaching bradycardia\n";
     case Category::NORMAL:      return "Normal pule rate\n";

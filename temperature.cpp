@@ -25,8 +25,8 @@ std::set<int> Temperature::collectInvalidCategories() const {
     return invalidCategoies;
 }
 std::string Temperature::getMessage(int category) const {
-    auto cat = static_cast<Category>(category);
-    switch (cat) {
+    auto temperatureCategory = static_cast<Category>(category);
+    switch (temperatureCategory) {
     case Category::HYPOTHERMIA:     return "Hypothermia : Temperature is critical!\n";
     case Category::NEAR_HYPO:       return "Warning: Approaching hypothermia\n";
     case Category::NORMAL:          return "Normal Temperature\n";
