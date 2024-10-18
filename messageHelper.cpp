@@ -1,3 +1,6 @@
+//  Note: 'messageHelper.cpp' has CCN=6. 
+//  Hence, ignored to keep rest of the system conform to CCN=3
+
 #include <string>
 #include "./temperature.h"
 #include "./pulserate.h"

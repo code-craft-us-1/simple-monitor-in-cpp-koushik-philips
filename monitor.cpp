@@ -1,6 +1,7 @@
 #include "./monitor.h"
 #include <string>
 
+// Template design pattern
 bool checkVital(const Vital& vital) {
     auto category = vital.getCategory();
     auto msg = vital.getMessage(category);
@@ -8,12 +9,15 @@ bool checkVital(const Vital& vital) {
     vital.displayTransitionGraphics();
     return vital.isVitalOk(category);
 }
+
 bool CheckTemperatureVital(float temperature, std::string units) {
     return checkVital(Temperature(temperature, units));
 }
+
 bool CheckPulseRateVital(float pulseRate) {
     return checkVital(PulseRate(pulseRate));
 }
+
 bool CheckSPO2Vital(float spo2) {
     return checkVital(SPO2(spo2));
 }

@@ -12,6 +12,7 @@ PulseRate::PulseRate(float pulserate) :
         TOLERANCE_PERCENT, pulserate) {
     initLevels();
 }
+
 std::set<int> PulseRate::collectInvalidCategories() const {
     std::set<int> invalidCategoies;
     invalidCategoies.insert(static_cast<int>(Category::BRADYCARDIA));
@@ -20,6 +21,8 @@ std::set<int> PulseRate::collectInvalidCategories() const {
     invalidCategoies.insert(static_cast<int>(Category::TACHYCARDIA));
     return invalidCategoies;
 }
+
+//  Moved code to 'messageHelper.cpp' for conforming to CCN=3
 std::string PulseRate::getMessage(int category) const {
     return getPulseRateCategoryMessage(category);
 }

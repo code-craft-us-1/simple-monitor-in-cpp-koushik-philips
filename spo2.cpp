@@ -21,17 +21,8 @@ std::set<int> SPO2::collectInvalidCategories() const {
     invalidCategoies.insert(static_cast<int>(Category::HYPEROAXEMIA));
     return invalidCategoies;
 }
+
+//  Moved code to 'messageHelper.cpp' for conforming to CCN=3
 std::string SPO2::getMessage(int category) const {
     return getSPO2CategoryMessage(category);
-    /*auto spo2category = static_cast<Category>(category);
-    switch (spo2category) {
-    case Category::HYPOAXEMIA:          return "Hypoaxemia : Oxygen Saturation out of range!\n";
-    case Category::NEAR_HYPOAXEMIA:     return "Warning: Approaching hypoaxemia\n";
-    case Category::NORMAL:              return "Normal Temperature\n";
-    case Category::NEAR_HYPEROAXEMIA:   return "Warning: Approaching hyperoaxemia\n";
-    case Category::HYPEROAXEMIA:        return "Hyperoaxemia : Oxygen Saturation out of range!\n";
-    default:
-        break;
-    }
-    return "Error";*/
 }

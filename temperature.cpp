@@ -14,11 +14,13 @@ Temperature::Temperature(float temperature, std::string units) :
     initLevels();
     normalizeMeasurement();
 }
+
 void Temperature::normalizeMeasurement() {
     if (measurementUnits == "Celsius") {
         value = ((9.0f / 5.0f) * value) + 32.0f;
     }
 }
+
 std::set<int> Temperature::collectInvalidCategories() const {
     std::set<int> invalidCategoies;
     invalidCategoies.insert(static_cast<int>(Category::HYPOTHERMIA));
@@ -27,6 +29,8 @@ std::set<int> Temperature::collectInvalidCategories() const {
     invalidCategoies.insert(static_cast<int>(Category::HYPERTHERMIA));
     return invalidCategoies;
 }
+
+//  Moved code to 'messageHelper.cpp' for conforming to CCN=3
 std::string Temperature::getMessage(int category) const {
     return getTemperatureCategoryMessage(category);
 }
