@@ -1,6 +1,7 @@
+#include <memory>
 #include "./monitor.h"
 #include "gtest/gtest.h"
-#include <memory>
+
 
 // Temperature ranges = {95,96.53,100.47,102}
 // Pulse-rate ranges = {60, 61.5, 98.5, 100}
