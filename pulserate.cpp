@@ -7,19 +7,18 @@ using VitalConstants::PULSE_LIMIT_HIGH;
 using VitalConstants::TOLERANCE_PERCENT;
 extern std::string getPulseRateCategoryMessage(int category);
 
-PulseRate::PulseRate(float pulserate) :
-    Vital(PULSE_LIMIT_LOW, PULSE_LIMIT_HIGH,
-        TOLERANCE_PERCENT, pulserate) {
-    initLevels();
+//  Singleton
+VitalBaseline& createPulseRateBaseline(float lowLimit, float highLimit,
+                                       float toleranceLimit)
+{
+    static VitalBaseline commonBaseline(lowLimit, highLimit,
+        toleranceLimit);
+    return commonBaseline;
 }
 
-std::set<int> PulseRate::collectInvalidCategories() const {
-    std::set<int> invalidCategoies;
-    invalidCategoies.insert(static_cast<int>(Category::BRADYCARDIA));
-    invalidCategoies.insert(static_cast<int>(Category::NEAR_BRADY));
-    invalidCategoies.insert(static_cast<int>(Category::NEAR_TACHY));
-    invalidCategoies.insert(static_cast<int>(Category::TACHYCARDIA));
-    return invalidCategoies;
+PulseRate::PulseRate(float pulserate) :
+    Vital(pulserate,
+        createPulseRateBaseline(PULSE_LIMIT_LOW, PULSE_LIMIT_HIGH, TOLERANCE_PERCENT)) {
 }
 
 //  Moved code to 'messageHelper.cpp' for conforming to CCN=3

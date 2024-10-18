@@ -9,19 +9,26 @@ using VitalConstants::VITALS_MAX;
 using VitalConstants::TOLERANCE_PERCENT;
 using Levels = std::vector<float>;
 
-struct Vital {
+struct VitalBaseline
+{
     const float low{ VITALS_MIN };
     const float high{ VITALS_MAX };
     const float tolerance{ TOLERANCE_PERCENT };
-    float value;
     Levels levels;
 
-    Vital(float lowLimit, float highLimit,
-        float toleranceLimit, float vitalValue);
-    virtual ~Vital() = default;
-    virtual std::set<int> collectInvalidCategories() const = 0;
-    virtual std::string getMessage(int category) const = 0;
+    VitalBaseline(float lowLimit, float highLimit,
+        float toleranceLimit);
     void initLevels();
+};
+
+struct Vital {
+    float value;
+    const VitalBaseline& vitalbase;
+
+    Vital(float vitalValue, const VitalBaseline& baseline);
+    virtual ~Vital() = default;
+    virtual std::set<int>& collectInvalidCategories() const;
+    virtual std::string getMessage(int category) const = 0;
     int  getCategory() const;
     void displayMessage(std::string message) const;
     void displayTransitionGraphics() const;

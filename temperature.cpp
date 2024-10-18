@@ -7,11 +7,19 @@ using VitalConstants::TEMP_LIMIT_HIGH;
 using VitalConstants::TOLERANCE_PERCENT;
 extern std::string getTemperatureCategoryMessage(int category);
 
+//  Singleton
+VitalBaseline& createTemperatureBaseline(float lowLimit, float highLimit,
+                                         float toleranceLimit)
+{
+    static VitalBaseline commonBaseline(lowLimit, highLimit,
+        toleranceLimit);
+    return commonBaseline;
+}
+
 Temperature::Temperature(float temperature, std::string units) :
-    Vital(TEMP_LIMIT_LOW, TEMP_LIMIT_HIGH,
-        TOLERANCE_PERCENT, temperature),
+    Vital(temperature, 
+        createTemperatureBaseline(TEMP_LIMIT_LOW, TEMP_LIMIT_HIGH, TOLERANCE_PERCENT)),
     measurementUnits(units) {
-    initLevels();
     normalizeMeasurement();
 }
 
@@ -19,15 +27,6 @@ void Temperature::normalizeMeasurement() {
     if (measurementUnits == "Celsius") {
         value = ((9.0f / 5.0f) * value) + 32.0f;
     }
-}
-
-std::set<int> Temperature::collectInvalidCategories() const {
-    std::set<int> invalidCategoies;
-    invalidCategoies.insert(static_cast<int>(Category::HYPOTHERMIA));
-    invalidCategoies.insert(static_cast<int>(Category::NEAR_HYPO));
-    invalidCategoies.insert(static_cast<int>(Category::NEAR_HYPER));
-    invalidCategoies.insert(static_cast<int>(Category::HYPERTHERMIA));
-    return invalidCategoies;
 }
 
 //  Moved code to 'messageHelper.cpp' for conforming to CCN=3

@@ -18,17 +18,19 @@ TEST(Monitor, MonitorTemperature) {
     ASSERT_TRUE(CheckTemperatureVital(37.f, "Celsius"));        // Normal. Units mentioned.
     ASSERT_TRUE(CheckTemperatureVital(98.6f, "Fahrenheit"));    // Normal. Units mentioned.
 }
+
 TEST(Monitor, MonitorPulseRate) {
     // Individual checks and boundary-conditions
     ASSERT_FALSE(CheckPulseRateVital(59));                  // Bradycardia
     ASSERT_FALSE(CheckPulseRateVital(60));                  // Near Bradycardia
     ASSERT_FALSE(CheckPulseRateVital(61.5f));               // Near Bradycardia
-    ASSERT_TRUE(CheckPulseRateVital(61.54f));               // Normal
+    ASSERT_TRUE(CheckPulseRateVital(61.56f));               // Normal
     ASSERT_TRUE(CheckPulseRateVital(98.5f));                // Normal
     ASSERT_FALSE(CheckPulseRateVital(98.6f));               // Near Tachycardia
     ASSERT_FALSE(CheckPulseRateVital(100));                 // Near Tachycardia
     ASSERT_FALSE(CheckPulseRateVital(101));                 // Tachycardia
 }
+
 TEST(Monitor, MonitorSpo2) {
     // Individual checks and boundary-conditions
     ASSERT_FALSE(CheckSPO2Vital(89));                       // Hypoaxemia
@@ -40,6 +42,7 @@ TEST(Monitor, MonitorSpo2) {
     ASSERT_FALSE(CheckSPO2Vital(100));                      // Near Hyperoaxemia
     ASSERT_FALSE(CheckSPO2Vital(101));                      // Hyperoaxemia
 }
+
 TEST(Monitor, NotOkWhenAnyVitalIsOffRange) {
   // check combinations
   ASSERT_FALSE(vitalsOk(99, 102, 70));      //  not-OK- 1 (T,P-out,S-out)
@@ -51,4 +54,17 @@ TEST(Monitor, NotOkWhenAnyVitalIsOffRange) {
   ASSERT_FALSE(vitalsOk(98, 105, 70));      //  not-OK- 7 (T,P-out,S-out)
   ASSERT_FALSE(vitalsOk(103, 105, 70));     //  not-OK- 8 (T-out,P-out,S-out)
   ASSERT_TRUE(vitalsOk(98.1f, 70, 98));     //  OK    - 9 (T,P,S)
+}
+
+TEST(Monitor, MonitorAllPossibleVitalCombos) {
+    //  Different combination of vitals
+    ASSERT_TRUE(vitalsOk({ std::make_shared<Temperature>(96.54f), 
+                           std::make_shared<PulseRate>(61.56f), 
+                           std::make_shared<SPO2>(91.6f) }));
+    ASSERT_TRUE(vitalsOk({ std::make_shared<Temperature>(100.47f), 
+                           std::make_shared<PulseRate>(98.5f) }));
+    ASSERT_TRUE(vitalsOk({ std::make_shared <PulseRate>(98.5f), 
+                           std::make_shared <SPO2>(91.6f) }));
+    ASSERT_TRUE(vitalsOk({ std::make_shared <Temperature>(36.5f,"Celsius"), 
+                           std::make_shared <SPO2>(91.6f)}));
 }

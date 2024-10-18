@@ -7,19 +7,18 @@ using VitalConstants::SPO2_LIMIT_HIGH;
 using VitalConstants::TOLERANCE_PERCENT;
 extern std::string getSPO2CategoryMessage(int category);
 
-SPO2::SPO2(float spo2) :
-    Vital(SPO2_LIMIT_LOW, SPO2_LIMIT_HIGH,
-          TOLERANCE_PERCENT, spo2) {
-    initLevels();
+//  Singleton
+VitalBaseline& createSPO2Baseline(float lowLimit, float highLimit,
+                                  float toleranceLimit)
+{
+    static VitalBaseline commonBaseline(lowLimit, highLimit,
+        toleranceLimit);
+    return commonBaseline;
 }
 
-std::set<int> SPO2::collectInvalidCategories() const {
-    std::set<int> invalidCategoies;
-    invalidCategoies.insert(static_cast<int>(Category::HYPOAXEMIA));
-    invalidCategoies.insert(static_cast<int>(Category::NEAR_HYPOAXEMIA));
-    invalidCategoies.insert(static_cast<int>(Category::NEAR_HYPEROAXEMIA));
-    invalidCategoies.insert(static_cast<int>(Category::HYPEROAXEMIA));
-    return invalidCategoies;
+SPO2::SPO2(float spo2) :
+    Vital(spo2,
+        createSPO2Baseline(SPO2_LIMIT_LOW, SPO2_LIMIT_HIGH, TOLERANCE_PERCENT)) {
 }
 
 //  Moved code to 'messageHelper.cpp' for conforming to CCN=3

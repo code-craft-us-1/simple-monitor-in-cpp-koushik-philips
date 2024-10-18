@@ -9,12 +9,13 @@ using std::flush;
 using std::this_thread::sleep_for;
 using std::chrono::seconds;
 
-Vital::Vital(float lowLimit, float highLimit,
-    float toleranceLimit, float vitalValue) :
+VitalBaseline::VitalBaseline(float lowLimit, float highLimit,
+    float toleranceLimit) :
     low(lowLimit), high(highLimit),
-    tolerance(toleranceLimit), value(vitalValue) {}
-
-void Vital::initLevels() {
+    tolerance(toleranceLimit) {
+    initLevels();
+}
+void VitalBaseline::initLevels() {
     // Keep levels in sorted order
     levels.push_back(low);
     levels.push_back(low + (tolerance * high) / 100);
@@ -22,12 +23,22 @@ void Vital::initLevels() {
     levels.push_back(high);
 }
 
+Vital::Vital(float vitalValue,const VitalBaseline& baseline) :
+    value(vitalValue), vitalbase(baseline) {
+}
+
+std::set<int>& Vital::collectInvalidCategories() const {
+    static auto numCategories{ static_cast<int>(vitalbase.levels.size()) };
+    static std::set<int> invalidCategoies{ 0, 1, numCategories - 1, numCategories };
+    return invalidCategoies;
+}
+
 int Vital::getCategory() const {
-    auto iter = std::lower_bound(levels.begin(), levels.end(), value);
-    if (value == low) {
-        return static_cast<int>(std::distance(levels.begin(), iter)) + 1;
+    auto iter = std::lower_bound(vitalbase.levels.begin(), vitalbase.levels.end(), value);
+    if (value == vitalbase.low) {
+        return static_cast<int>(std::distance(vitalbase.levels.begin(), iter)) + 1;
     } else {
-        return static_cast<int>(std::distance(levels.begin(), iter));
+        return static_cast<int>(std::distance(vitalbase.levels.begin(), iter));
     }
 }
 
@@ -45,7 +56,7 @@ void Vital::displayTransitionGraphics() const {
 }
 
 bool Vital::isVitalOk(int category) const {
-    auto invalidCategories = collectInvalidCategories();
+    auto& invalidCategories = collectInvalidCategories();
     if (invalidCategories.find(category) != invalidCategories.end()) {
         return false;
     } else {

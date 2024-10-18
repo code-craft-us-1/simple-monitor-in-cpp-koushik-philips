@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 #include "./vital.h"
 #include "./temperature.h"
 #include "./pulserate.h"
@@ -7,7 +8,7 @@
 
 bool vitalsOk(float temperature, float pulseRate, float spo2);
 bool vitalsOk(Temperature temperature, PulseRate pulseRate, SPO2 spo2);
-bool vitalsOk(std::vector<Vital> vitals);
+bool vitalsOk(std::vector< std::shared_ptr<Vital> > vitals);
 bool CheckTemperatureVital(float temperature, std::string units = "Fahrenheit");
 bool CheckPulseRateVital(float pulseRate);
 bool CheckSPO2Vital(float spo2);
