@@ -16,4 +16,5 @@ struct SPO2 : public Vital {
   explicit SPO2(float spo2);
   std::set<int> collectInvalidCategories() const override;
   std::string getMessage(int category) const override;
+  friend std::string getSPO2CategoryMessage(int category);
 };

@@ -5,6 +5,7 @@
 using VitalConstants::TEMP_LIMIT_LOW;
 using VitalConstants::TEMP_LIMIT_HIGH;
 using VitalConstants::TOLERANCE_PERCENT;
+extern std::string getTemperatureCategoryMessage(int category);
 
 Temperature::Temperature(float temperature, std::string units) :
     Vital(TEMP_LIMIT_LOW, TEMP_LIMIT_HIGH,
@@ -27,15 +28,5 @@ std::set<int> Temperature::collectInvalidCategories() const {
     return invalidCategoies;
 }
 std::string Temperature::getMessage(int category) const {
-    auto temperatureCategory = static_cast<Category>(category);
-    switch (temperatureCategory) {
-    case Category::HYPOTHERMIA:     return "Hypothermia : Temperature is critical!\n";
-    case Category::NEAR_HYPO:       return "Warning: Approaching hypothermia\n";
-    case Category::NORMAL:          return "Normal Temperature\n";
-    case Category::NEAR_HYPER:      return "Warning: Approaching hyperthermia\n";
-    case Category::HYPERTHERMIA:    return "Hyperthermia : Temperature is critical!\n";
-    default:
-        break;
-    }
-    return "Error";
+    return getTemperatureCategoryMessage(category);
 }

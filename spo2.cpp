@@ -5,6 +5,7 @@
 using VitalConstants::SPO2_LIMIT_LOW;
 using VitalConstants::SPO2_LIMIT_HIGH;
 using VitalConstants::TOLERANCE_PERCENT;
+extern std::string getSPO2CategoryMessage(int category);
 
 SPO2::SPO2(float spo2) :
     Vital(SPO2_LIMIT_LOW, SPO2_LIMIT_HIGH,
@@ -21,7 +22,8 @@ std::set<int> SPO2::collectInvalidCategories() const {
     return invalidCategoies;
 }
 std::string SPO2::getMessage(int category) const {
-    auto spo2category = static_cast<Category>(category);
+    return getSPO2CategoryMessage(category);
+    /*auto spo2category = static_cast<Category>(category);
     switch (spo2category) {
     case Category::HYPOAXEMIA:          return "Hypoaxemia : Oxygen Saturation out of range!\n";
     case Category::NEAR_HYPOAXEMIA:     return "Warning: Approaching hypoaxemia\n";
@@ -31,5 +33,5 @@ std::string SPO2::getMessage(int category) const {
     default:
         break;
     }
-    return "Error";
+    return "Error";*/
 }

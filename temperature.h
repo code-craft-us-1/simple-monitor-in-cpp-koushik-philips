@@ -18,4 +18,5 @@ struct Temperature : public Vital {
   void normalizeMeasurement();
   std::set<int> collectInvalidCategories() const override;
   std::string getMessage(int category) const override;
+  friend std::string getTemperatureCategoryMessage(int category);
 };

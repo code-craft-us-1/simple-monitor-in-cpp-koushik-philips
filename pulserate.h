@@ -16,4 +16,5 @@ struct PulseRate : public Vital {
   explicit PulseRate(float pulserate);
   std::set<int> collectInvalidCategories() const override;
   std::string getMessage(int category) const override;
+  friend std::string getPulseRateCategoryMessage(int category);
 };

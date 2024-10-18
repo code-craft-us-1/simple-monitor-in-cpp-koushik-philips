@@ -5,6 +5,7 @@
 using VitalConstants::PULSE_LIMIT_LOW;
 using VitalConstants::PULSE_LIMIT_HIGH;
 using VitalConstants::TOLERANCE_PERCENT;
+extern std::string getPulseRateCategoryMessage(int category);
 
 PulseRate::PulseRate(float pulserate) :
     Vital(PULSE_LIMIT_LOW, PULSE_LIMIT_HIGH,
@@ -20,15 +21,5 @@ std::set<int> PulseRate::collectInvalidCategories() const {
     return invalidCategoies;
 }
 std::string PulseRate::getMessage(int category) const {
-    auto pulseRateCategory = static_cast<Category>(category);
-    switch (pulseRateCategory) {
-    case Category::BRADYCARDIA: return "Bradycardia : Pulse Rate is out of range!\n";
-    case Category::NEAR_BRADY:  return "Warning: Approaching bradycardia\n";
-    case Category::NORMAL:      return "Normal pule rate\n";
-    case Category::NEAR_TACHY:  return "Warning: Approaching tachycardia\n";
-    case Category::TACHYCARDIA: return "Tachycardia : Pulse Rate is out of range!\n";
-    default:
-        break;
-    }
-    return "Error";
+    return getPulseRateCategoryMessage(category);
 }
