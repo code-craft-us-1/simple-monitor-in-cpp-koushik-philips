@@ -9,11 +9,10 @@ extern std::string getSPO2CategoryMessage(int category);
 
 //  Singleton
 VitalBaseline& createSPO2Baseline(float lowLimit, float highLimit,
-                                  float toleranceLimit)
-{
-    static VitalBaseline commonBaseline(lowLimit, highLimit,
-        toleranceLimit);
-    return commonBaseline;
+                                  float toleranceLimit) {
+    static VitalBaseline spo2Baseline(lowLimit, highLimit,
+                                  toleranceLimit);
+    return spo2Baseline;
 }
 
 SPO2::SPO2(float spo2) :

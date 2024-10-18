@@ -1,5 +1,6 @@
 #include "./monitor.h"
 #include "gtest/gtest.h"
+#include <memory>
 
 // Temperature ranges = {95,96.53,100.47,102}
 // Pulse-rate ranges = {60, 61.5, 98.5, 100}
@@ -58,13 +59,13 @@ TEST(Monitor, NotOkWhenAnyVitalIsOffRange) {
 
 TEST(Monitor, MonitorAllPossibleVitalCombos) {
     //  Different combination of vitals
-    ASSERT_TRUE(vitalsOk({ std::make_shared<Temperature>(96.54f), 
-                           std::make_shared<PulseRate>(61.56f), 
+    ASSERT_TRUE(vitalsOk({ std::make_shared<Temperature>(96.54f),
+                           std::make_shared<PulseRate>(61.56f),
                            std::make_shared<SPO2>(91.6f) }));
-    ASSERT_TRUE(vitalsOk({ std::make_shared<Temperature>(100.47f), 
+    ASSERT_TRUE(vitalsOk({ std::make_shared<Temperature>(100.47f),
                            std::make_shared<PulseRate>(98.5f) }));
-    ASSERT_TRUE(vitalsOk({ std::make_shared <PulseRate>(98.5f), 
+    ASSERT_TRUE(vitalsOk({ std::make_shared <PulseRate>(98.5f),
                            std::make_shared <SPO2>(91.6f) }));
-    ASSERT_TRUE(vitalsOk({ std::make_shared <Temperature>(36.5f,"Celsius"), 
+    ASSERT_TRUE(vitalsOk({ std::make_shared <Temperature>(36.5f, "Celsius"),
                            std::make_shared <SPO2>(91.6f)}));
 }

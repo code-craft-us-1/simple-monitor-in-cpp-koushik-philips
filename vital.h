@@ -9,8 +9,7 @@ using VitalConstants::VITALS_MAX;
 using VitalConstants::TOLERANCE_PERCENT;
 using Levels = std::vector<float>;
 
-struct VitalBaseline
-{
+struct VitalBaseline {
     const float low{ VITALS_MIN };
     const float high{ VITALS_MAX };
     const float tolerance{ TOLERANCE_PERCENT };

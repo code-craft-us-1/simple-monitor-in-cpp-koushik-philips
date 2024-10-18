@@ -3,6 +3,7 @@
 
 #include <string>
 #include "./constants.h"
+#include "./messageHelper.h"
 
 using VitalConstants::TemperatureCategory;
 using VitalConstants::PulseRateCategory;

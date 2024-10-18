@@ -2,6 +2,7 @@
 #include <thread>
 #include <chrono>
 #include <string>
+#include <set>
 #include "./vital.h"
 
 using std::cout;
@@ -23,7 +24,7 @@ void VitalBaseline::initLevels() {
     levels.push_back(high);
 }
 
-Vital::Vital(float vitalValue,const VitalBaseline& baseline) :
+Vital::Vital(float vitalValue, const VitalBaseline& baseline) :
     value(vitalValue), vitalbase(baseline) {
 }
 

@@ -9,15 +9,14 @@ extern std::string getTemperatureCategoryMessage(int category);
 
 //  Singleton
 VitalBaseline& createTemperatureBaseline(float lowLimit, float highLimit,
-                                         float toleranceLimit)
-{
-    static VitalBaseline commonBaseline(lowLimit, highLimit,
-        toleranceLimit);
-    return commonBaseline;
+                                         float toleranceLimit) {
+    static VitalBaseline temperatureBaseline(lowLimit, highLimit,
+                                         toleranceLimit);
+    return temperatureBaseline;
 }
 
 Temperature::Temperature(float temperature, std::string units) :
-    Vital(temperature, 
+    Vital(temperature,
         createTemperatureBaseline(TEMP_LIMIT_LOW, TEMP_LIMIT_HIGH, TOLERANCE_PERCENT)),
     measurementUnits(units) {
     normalizeMeasurement();

@@ -32,7 +32,7 @@ bool CheckSPO2Vital(float spo2) {
     return checkVital(SPO2(spo2));
 }
 
-// overload 
+// overload
 bool vitalsOk(float temperature, float pulseRate, float spo2) {
     return CheckTemperatureVital(temperature) &&
            CheckPulseRateVital(pulseRate) &&

@@ -9,11 +9,10 @@ extern std::string getPulseRateCategoryMessage(int category);
 
 //  Singleton
 VitalBaseline& createPulseRateBaseline(float lowLimit, float highLimit,
-                                       float toleranceLimit)
-{
-    static VitalBaseline commonBaseline(lowLimit, highLimit,
-        toleranceLimit);
-    return commonBaseline;
+                                       float toleranceLimit) {
+    static VitalBaseline pulseRateBaseline(lowLimit, highLimit,
+                                       toleranceLimit);
+    return pulseRateBaseline;
 }
 
 PulseRate::PulseRate(float pulserate) :
