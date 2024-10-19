@@ -31,5 +31,8 @@ T& createBaseline(float lowLimit, float highLimit,
     float toleranceLimit) {
     static T baseline(lowLimit, highLimit,
                                  toleranceLimit);
+    if (baseline.levels.size() == 0) {
+        baseline.initLevels();
+    }
     return baseline;
 }

@@ -4,7 +4,6 @@ VitalBaseline::VitalBaseline(float lowLimit, float highLimit,
     float toleranceLimit) :
     low(lowLimit), high(highLimit),
     tolerance(toleranceLimit) {
-    initLevels();
 }
 
 void VitalBaseline::initLevels() {
