@@ -2,12 +2,15 @@
 #include <vector>
 #include <limits>
 
-namespace {
+namespace VitalConstants {
 constexpr float VITALS_MAX = std::numeric_limits<float>::max();
 constexpr float VITALS_MIN = std::numeric_limits<float>::min();
 constexpr float TOLERANCE_PERCENT = 1.5;
 }
 
+using VitalConstants::VITALS_MAX;
+using VitalConstants::VITALS_MIN;
+using VitalConstants::TOLERANCE_PERCENT;
 using Levels = std::vector<float>;
 
 struct VitalBaseline {
