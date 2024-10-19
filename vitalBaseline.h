@@ -29,7 +29,7 @@ struct VitalBaseline {
 template<typename T>
 T& createBaseline(float lowLimit, float highLimit,
     float toleranceLimit) {
-    static T temperatureBaseline(lowLimit, highLimit,
+    static T baseline(lowLimit, highLimit,
                                  toleranceLimit);
-    return temperatureBaseline;
+    return baseline;
 }
