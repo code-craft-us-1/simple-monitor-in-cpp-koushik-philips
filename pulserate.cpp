@@ -5,9 +5,9 @@
 extern std::string getPulseRateCategoryMessage(int category);
 
 namespace {
-    constexpr float PULSE_LIMIT_HIGH = 100;
-    constexpr float PULSE_LIMIT_LOW = 60;
-    constexpr float PULSE_TOLERANCE_PERCENT = 1.5;
+constexpr float PULSE_LIMIT_HIGH = 100;
+constexpr float PULSE_LIMIT_LOW = 60;
+constexpr float PULSE_TOLERANCE_PERCENT = 1.5;
 }
 
 PulseRate::PulseRate(float pulserate) :

@@ -5,9 +5,9 @@
 extern std::string getTemperatureCategoryMessage(int category);
 
 namespace {
-    constexpr float TEMP_LIMIT_HIGH = 102;
-    constexpr float TEMP_LIMIT_LOW = 95;
-    constexpr float TEMP_TOLERANCE_PERCENT = 1.5;
+constexpr float TEMP_LIMIT_HIGH = 102;
+constexpr float TEMP_LIMIT_LOW = 95;
+constexpr float TEMP_TOLERANCE_PERCENT = 1.5;
 }
 
 Temperature::Temperature(float temperature, std::string units) :

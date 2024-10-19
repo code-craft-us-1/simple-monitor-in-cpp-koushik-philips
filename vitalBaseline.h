@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
+#include <limits>
 
 namespace {
-    constexpr float VITALS_MAX = std::numeric_limits<float>::max();
-    constexpr float VITALS_MIN = std::numeric_limits<float>::min();
-    constexpr float TOLERANCE_PERCENT = 1.5;
+constexpr float VITALS_MAX = std::numeric_limits<float>::max();
+constexpr float VITALS_MIN = std::numeric_limits<float>::min();
+constexpr float TOLERANCE_PERCENT = 1.5;
 }
 
 using Levels = std::vector<float>;
@@ -24,8 +25,7 @@ struct VitalBaseline {
 //  singleton
 template<typename T>
 T& createBaseline(float lowLimit, float highLimit,
-    float toleranceLimit)
-{
+    float toleranceLimit) {
     static T temperatureBaseline(lowLimit, highLimit,
                                  toleranceLimit);
     return temperatureBaseline;
