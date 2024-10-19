@@ -2,22 +2,17 @@
 #include <string>
 #include "./pulserate.h"
 
-using VitalConstants::PULSE_LIMIT_LOW;
-using VitalConstants::PULSE_LIMIT_HIGH;
-using VitalConstants::TOLERANCE_PERCENT;
 extern std::string getPulseRateCategoryMessage(int category);
 
-//  Singleton
-VitalBaseline& createPulseRateBaseline(float lowLimit, float highLimit,
-                                       float toleranceLimit) {
-    static VitalBaseline pulseRateBaseline(lowLimit, highLimit,
-                                       toleranceLimit);
-    return pulseRateBaseline;
+namespace {
+    constexpr float PULSE_LIMIT_HIGH = 100;
+    constexpr float PULSE_LIMIT_LOW = 60;
+    constexpr float PULSE_TOLERANCE_PERCENT = 1.5;
 }
 
 PulseRate::PulseRate(float pulserate) :
     Vital(pulserate,
-        createPulseRateBaseline(PULSE_LIMIT_LOW, PULSE_LIMIT_HIGH, TOLERANCE_PERCENT)) {
+        createBaseline<PulseRateBaseline>(PULSE_LIMIT_LOW, PULSE_LIMIT_HIGH, TOLERANCE_PERCENT)) {
 }
 
 //  Moved code to 'messageHelper.cpp' for conforming to CCN=3

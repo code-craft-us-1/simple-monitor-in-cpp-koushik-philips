@@ -2,9 +2,15 @@
 #include <vector>
 #include "./constants.h"
 
-using VitalConstants::VITALS_MIN;
-using VitalConstants::VITALS_MAX;
-using VitalConstants::TOLERANCE_PERCENT;
+//using VitalConstants::VITALS_MIN;
+//using VitalConstants::VITALS_MAX;
+//using VitalConstants::TOLERANCE_PERCENT;
+namespace {
+    constexpr float VITALS_MAX = std::numeric_limits<float>::max();
+    constexpr float VITALS_MIN = std::numeric_limits<float>::min();
+    constexpr float TOLERANCE_PERCENT = 1.5;
+}
+
 using Levels = std::vector<float>;
 
 struct VitalBaseline {
@@ -15,5 +21,15 @@ struct VitalBaseline {
 
     VitalBaseline(float lowLimit, float highLimit,
         float toleranceLimit);
-    void initLevels();
+    virtual ~VitalBaseline() = default;
+    virtual void initLevels();
 };
+
+template<typename T>
+T& createBaseline(float lowLimit, float highLimit,
+    float toleranceLimit)
+{
+    static T temperatureBaseline(lowLimit, highLimit,
+                                 toleranceLimit);
+    return temperatureBaseline;
+}

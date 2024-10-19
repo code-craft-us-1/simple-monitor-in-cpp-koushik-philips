@@ -2,22 +2,18 @@
 #include <string>
 #include "./temperature.h"
 
-using VitalConstants::TEMP_LIMIT_LOW;
-using VitalConstants::TEMP_LIMIT_HIGH;
-using VitalConstants::TOLERANCE_PERCENT;
 extern std::string getTemperatureCategoryMessage(int category);
 
-//  Singleton
-VitalBaseline& createTemperatureBaseline(float lowLimit, float highLimit,
-                                         float toleranceLimit) {
-    static VitalBaseline temperatureBaseline(lowLimit, highLimit,
-                                         toleranceLimit);
-    return temperatureBaseline;
+namespace {
+    constexpr float TEMP_LIMIT_HIGH = 102;
+    constexpr float TEMP_LIMIT_LOW = 95;
+    constexpr float TEMP_TOLERANCE_PERCENT = 1.5;
 }
 
 Temperature::Temperature(float temperature, std::string units) :
     Vital(temperature,
-        createTemperatureBaseline(TEMP_LIMIT_LOW, TEMP_LIMIT_HIGH, TOLERANCE_PERCENT)),
+        createBaseline<TemperatureBaseline>(TEMP_LIMIT_LOW, TEMP_LIMIT_HIGH,
+                                            TEMP_TOLERANCE_PERCENT)),
     measurementUnits(units) {
     normalizeMeasurement();
 }

@@ -3,8 +3,21 @@
 #include <string>
 #include "./vital.h"
 
-VitalBaseline& createTemperatureBaseline(float lowLimit, float highLimit,
-                                         float toleranceLimit);
+// Number of categories = number of 'levels' + 1
+enum class TemperatureCategory {
+    HYPOTHERMIA,
+    NEAR_HYPO,
+    NORMAL,
+    NEAR_HYPER,
+    HYPERTHERMIA
+};
+
+struct TemperatureBaseline : public VitalBaseline {
+    TemperatureBaseline(float lowLimit, float highLimit,
+        float toleranceLimit) :
+        VitalBaseline(lowLimit, highLimit, toleranceLimit) {
+    }
+};
 
 struct Temperature : public Vital {
  private:

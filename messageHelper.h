@@ -4,4 +4,3 @@
 std::string getTemperatureCategoryMessage(int category);
 std::string getPulseRateCategoryMessage(int category);
 std::string getSPO2CategoryMessage(int category);
-

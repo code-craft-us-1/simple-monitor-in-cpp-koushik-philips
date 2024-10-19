@@ -3,8 +3,21 @@
 #include <string>
 #include "./vital.h"
 
-VitalBaseline& createPulseRateBaseline(float lowLimit, float highLimit,
-                                       float toleranceLimit);
+// Number of categories = number of 'levels' + 1
+enum class PulseRateCategory {
+    BRADYCARDIA,
+    NEAR_BRADY,
+    NORMAL,
+    NEAR_TACHY,
+    TACHYCARDIA
+};
+
+struct PulseRateBaseline : public VitalBaseline {
+    PulseRateBaseline(float lowLimit, float highLimit,
+        float toleranceLimit) :
+        VitalBaseline(lowLimit, highLimit, toleranceLimit) {
+    }
+};
 
 struct PulseRate : public Vital {
   explicit PulseRate(float pulserate);

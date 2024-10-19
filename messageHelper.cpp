@@ -2,12 +2,10 @@
 //  Hence, ignored to keep rest of the system conform to CCN=3
 
 #include <string>
-#include "./constants.h"
 #include "./messageHelper.h"
-
-using VitalConstants::TemperatureCategory;
-using VitalConstants::PulseRateCategory;
-using VitalConstants::SPO2Category;
+#include "./temperature.h"
+#include "./pulserate.h"
+#include "./spo2.h"
 
 std::string getTemperatureCategoryMessage(int category) {
   auto temperatureCategory = static_cast<TemperatureCategory>(category);
