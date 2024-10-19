@@ -1,10 +1,6 @@
 #pragma once
 #include <vector>
-#include "./constants.h"
 
-//using VitalConstants::VITALS_MIN;
-//using VitalConstants::VITALS_MAX;
-//using VitalConstants::TOLERANCE_PERCENT;
 namespace {
     constexpr float VITALS_MAX = std::numeric_limits<float>::max();
     constexpr float VITALS_MIN = std::numeric_limits<float>::min();
@@ -25,6 +21,7 @@ struct VitalBaseline {
     virtual void initLevels();
 };
 
+//  singleton
 template<typename T>
 T& createBaseline(float lowLimit, float highLimit,
     float toleranceLimit)
