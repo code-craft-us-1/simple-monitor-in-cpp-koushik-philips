@@ -9,6 +9,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: run command
+      run: locale -a
+
     - name: install coverage tool
       run: |
         sudo apt-get update
@@ -27,9 +31,6 @@ jobs:
       
     - name: run
       run: build/test-monitor
-
-    - name: run command
-      run: locale -a
 
     - name: collect coverage
       run: gcovr --gcov-exclude=".*test.*" -r . --html --html-details -o coverage.html --print-summary
