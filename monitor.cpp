@@ -5,7 +5,7 @@
 //  Template
 bool isVitalNormal(const Vital& vital) {
     auto category = vital.getCategory();
-    auto& msg = vital.getMessage(category);
+    auto msg = vital.getMessage(category);
     vital.displayMessage(msg);
     // vital.displayTransitionGraphics();
     return vital.isVitalOk(category);
