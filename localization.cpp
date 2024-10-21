@@ -2,15 +2,46 @@
 #include <filesystem>
 #include "./localization.h"
 
-LANG Language::choice = LANG::LANG_eng;
+std::string Language::sLocalePreference;
+std::string Language::sLocaleResource;
 Table Language::messageTable;
 
-void Language::setLanguage( int lang ) {
-    Language::choice = static_cast<LANG>(lang);
+void Language::setLanguage(LANG language) {
+    switch (language)
+    {
+        case LANG::LANG_eng: {
+            sLocalePreference = "en_US.UTF-8";
+            sLocaleResource = "resource_eng.lang";
+            break;
+        }
+        case LANG::LANG_german: {
+            sLocalePreference = "De_DE";
+            sLocaleResource = "resource_ger.lang";
+            break;
+        }
+        default:
+        {
+            sLocalePreference = "en_US.UTF-8";
+            sLocaleResource = "resource_eng.lang";
+            break; 
+        }
+    }
     LoadResourceFile();
 }
-LANG Language::getLanguage() {
-    return Language::choice;
+
+std::string Language::getLanguage() {
+    return sLocalePreference;
+}
+
+std::string Language::getResource() {
+    return sLocaleResource;
+}
+
+void Language::LoadLocalePreference() {
+    std::ifstream file("localization.cfg");
+    std::getline(file, sLocalePreference);
+    file.close();
+    return;
 }
 
 void Language::LoadResourceFile() {
@@ -21,15 +52,10 @@ void Language::LoadResourceFile() {
     std::wstring sValue;
     std::string filename;
 
-    if (Language::getLanguage() == static_cast<LANG>(1)) {
-        loc = std::locale(std::locale("De_DE"), new std::codecvt_utf8<wchar_t>);
-        std::setlocale(LC_ALL, loc.name().c_str());
-        filename = std::string("resource_ger.lang");
-    } else {
-        loc = std::locale(std::locale("en_US.UTF-8"), new std::codecvt_utf8<wchar_t>);
-        std::setlocale(LC_ALL, loc.name().c_str());
-        filename = std::string("resource_eng.lang");
-    }
+    std::string slocale = Language::getLanguage();
+    loc = std::locale(std::locale(slocale), new std::codecvt_utf8<wchar_t>);
+    std::setlocale(LC_ALL, loc.name().c_str());
+    filename = Language::getResource();
 
     std::filesystem::path filePath(filename);
     std::filesystem::path folderPath = std::filesystem::path(__FILE__).remove_filename();
@@ -46,17 +72,10 @@ void Language::LoadResourceFile() {
             std::getline(strStream, sValue);
             messageTable.insert(std::make_pair(sKey, sValue));
 
-            if (Language::getLanguage() == static_cast<LANG>(1)) {
-                std::locale newLocale(std::locale("De_DE"));
-                std::setlocale(LC_ALL, newLocale.name().c_str());
-                std::locale::global(newLocale);
-                std::wcout.imbue(newLocale);
-            } else {
-                std::locale newLocale(std::locale("en_US.UTF-8"));
-                std::setlocale(LC_ALL, newLocale.name().c_str());
-                std::locale::global(newLocale);
-                std::wcout.imbue(newLocale);
-            }
+            std::locale nLoc = std::locale(slocale);
+            std::setlocale(LC_ALL, nLoc.name().c_str());
+            std::locale::global(nLoc);
+            std::wcout.imbue(nLoc);
         }
     }
     file.close();
@@ -65,4 +84,3 @@ void Language::LoadResourceFile() {
 Table& Language::getResourceTable() {
     return messageTable;
 }
-
