@@ -19,7 +19,8 @@ void Language::setLanguage(LANG language) {
             break;
         }
         case LANG::LANG_german: {
-            sLocalePreference = "De_DE";
+            //sLocalePreference = "De_DE";
+            sLocalePreference = "de_DE.UTF-8";
             sLocaleResource = "resource_ger.lang";
             break;
         }
