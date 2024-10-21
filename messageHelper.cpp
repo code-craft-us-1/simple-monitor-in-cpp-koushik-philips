@@ -6,45 +6,50 @@
 #include "./temperature.h"
 #include "./pulserate.h"
 #include "./spo2.h"
+#include "./localization.h"
 
-std::string getTemperatureCategoryMessage(int category) {
+std::wstring getTemperatureCategoryMessage(int category) {
+  auto& lookUpTable = Language::getResourceTable();
   auto temperatureCategory = static_cast<TemperatureCategory>(category);
   switch (temperatureCategory) {
-  case TemperatureCategory::HYPOTHERMIA:  return "Hypothermia : Temperature is critical!\n";
-  case TemperatureCategory::NEAR_HYPO:    return "Warning: Approaching hypothermia\n";
-  case TemperatureCategory::NORMAL:       return "Normal Temperature\n";
-  case TemperatureCategory::NEAR_HYPER:   return "Warning: Approaching hyperthermia\n";
-  case TemperatureCategory::HYPERTHERMIA: return "Hyperthermia : Temperature is critical!\n";
+  case TemperatureCategory::HYPOTHERMIA:  return lookUpTable[L"TEMP_HYPOTHERMIA"];
+  case TemperatureCategory::NEAR_HYPO:    return lookUpTable[L"TEMP_NEAR_HYPO"];
+  case TemperatureCategory::NORMAL:       return lookUpTable[L"TEMP_NORMAL"];
+  case TemperatureCategory::NEAR_HYPER:   return lookUpTable[L"TEMP_NEAR_HYPER"];
+  case TemperatureCategory::HYPERTHERMIA: return lookUpTable[L"TEMP_HYPERTHERMIA"];
   default:
       break;
   }
-  return "Error";
+  return std::wstring(L"Error");
 }
 
-std::string getPulseRateCategoryMessage(int category) {
+
+std::wstring getPulseRateCategoryMessage(int category) {
+  auto& lookUpTable = Language::getResourceTable();
   auto pulseRateCategory = static_cast<PulseRateCategory>(category);
   switch (pulseRateCategory) {
-  case PulseRateCategory::BRADYCARDIA: return "Bradycardia : Pulse Rate is out of range!\n";
-  case PulseRateCategory::NEAR_BRADY:  return "Warning: Approaching bradycardia\n";
-  case PulseRateCategory::NORMAL:      return "Normal pule rate\n";
-  case PulseRateCategory::NEAR_TACHY:  return "Warning: Approaching tachycardia\n";
-  case PulseRateCategory::TACHYCARDIA: return "Tachycardia : Pulse Rate is out of range!\n";
+  case PulseRateCategory::BRADYCARDIA: return lookUpTable[L"PULSE_BRADYCARDIA"];
+  case PulseRateCategory::NEAR_BRADY:  return lookUpTable[L"PULSE_NEAR_BRADY"];
+  case PulseRateCategory::NORMAL:      return lookUpTable[L"PULSE_NORMAL"];
+  case PulseRateCategory::NEAR_TACHY:  return lookUpTable[L"PULSE_NEAR_TACHY"];
+  case PulseRateCategory::TACHYCARDIA: return lookUpTable[L"PULSE_TACHYCARDIA"];
   default:
       break;
   }
-    return "Error";
+    return std::wstring(L"Error");
 }
 
-std::string getSPO2CategoryMessage(int category) {
+std::wstring getSPO2CategoryMessage(int category) {
+  auto& lookUpTable = Language::getResourceTable();
   auto spo2category = static_cast<SPO2Category>(category);
   switch (spo2category) {
-  case SPO2Category::HYPOAXEMIA:        return "Hypoaxemia : Oxygen Saturation out of range!\n";
-  case SPO2Category::NEAR_HYPOAXEMIA:   return "Warning: Approaching hypoaxemia\n";
-  case SPO2Category::NORMAL:            return "Normal oxygen saturation\n";
-  case SPO2Category::NEAR_HYPEROAXEMIA: return "Warning: Approaching hyperoaxemia\n";
-  case SPO2Category::HYPEROAXEMIA:      return "Hyperoaxemia : Oxygen Saturation out of range!\n";
+  case SPO2Category::HYPOAXEMIA:        return lookUpTable[L"SPO2_HYPOAXEMIA"];
+  case SPO2Category::NEAR_HYPOAXEMIA:   return lookUpTable[L"SPO2_NEAR_HYPOAXEMIA"];
+  case SPO2Category::NORMAL:            return lookUpTable[L"SPO2_NORMAL"];
+  case SPO2Category::NEAR_HYPEROAXEMIA: return lookUpTable[L"SPO2_NEAR_HYPEROAXEMIA"];
+  case SPO2Category::HYPEROAXEMIA:      return lookUpTable[L"SPO2_HYPEROAXEMIA"];
   default:
       break;
   }
-    return "Error";
+    return std::wstring(L"Error");
 }

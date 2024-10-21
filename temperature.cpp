@@ -2,7 +2,7 @@
 #include <string>
 #include "./temperature.h"
 
-extern std::string getTemperatureCategoryMessage(int category);
+extern std::wstring getTemperatureCategoryMessage(int category);
 
 namespace {
 constexpr float TEMP_LIMIT_HIGH = 102;
@@ -25,6 +25,6 @@ void Temperature::normalizeMeasurement() {
 }
 
 //  Moved code to 'messageHelper.cpp' for conforming to CCN=3
-std::string Temperature::getMessage(int category) const {
+std::wstring Temperature::getMessage(int category) const {
     return getTemperatureCategoryMessage(category);
 }

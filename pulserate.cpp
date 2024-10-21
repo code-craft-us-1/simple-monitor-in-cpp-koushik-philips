@@ -2,7 +2,7 @@
 #include <string>
 #include "./pulserate.h"
 
-extern std::string getPulseRateCategoryMessage(int category);
+extern std::wstring getPulseRateCategoryMessage(int category);
 
 namespace {
 constexpr float PULSE_LIMIT_HIGH = 100;
@@ -16,6 +16,6 @@ PulseRate::PulseRate(float pulserate) :
 }
 
 //  Moved code to 'messageHelper.cpp' for conforming to CCN=3
-std::string PulseRate::getMessage(int category) const {
+std::wstring PulseRate::getMessage(int category) const {
     return getPulseRateCategoryMessage(category);
 }

@@ -2,7 +2,7 @@
 #include <string>
 #include "./spo2.h"
 
-extern std::string getSPO2CategoryMessage(int category);
+extern std::wstring getSPO2CategoryMessage(int category);
 
 namespace {
 constexpr float SPO2_LIMIT_LOW = 90;
@@ -16,6 +16,6 @@ SPO2::SPO2(float spo2) :
 }
 
 //  Moved code to 'messageHelper.cpp' for conforming to CCN=3
-std::string SPO2::getMessage(int category) const {
+std::wstring SPO2::getMessage(int category) const {
     return getSPO2CategoryMessage(category);
 }

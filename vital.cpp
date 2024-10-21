@@ -6,6 +6,7 @@
 #include "./vital.h"
 
 using std::cout;
+using std::wcout;
 using std::flush;
 using std::this_thread::sleep_for;
 using std::chrono::seconds;
@@ -29,8 +30,8 @@ int Vital::getCategory() const {
     }
 }
 
-void Vital::displayMessage(std::string message) const {
-    cout << message;
+void Vital::displayMessage(std::wstring message) const {
+    wcout << message << std::endl;
 }
 
 void Vital::displayTransitionGraphics() const {

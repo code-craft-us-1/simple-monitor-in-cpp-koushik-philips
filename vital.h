@@ -11,9 +11,9 @@ struct Vital {
     Vital(float vitalValue, const VitalBaseline& baseline);
     virtual ~Vital() = default;
     virtual std::set<int>& collectInvalidCategories() const;
-    virtual std::string getMessage(int category) const = 0;
+    virtual std::wstring getMessage(int category) const = 0;
     int  getCategory() const;
-    void displayMessage(std::string message) const;
+    void displayMessage(std::wstring message) const;
     void displayTransitionGraphics() const;
     bool isVitalOk(int category) const;
 };

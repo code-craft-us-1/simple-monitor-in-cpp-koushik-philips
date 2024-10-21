@@ -9,7 +9,8 @@ enum class PulseRateCategory {
     NEAR_BRADY,
     NORMAL,
     NEAR_TACHY,
-    TACHYCARDIA
+    TACHYCARDIA,
+    COUNT_MAX
 };
 
 struct PulseRateBaseline : public VitalBaseline {
@@ -21,6 +22,6 @@ struct PulseRateBaseline : public VitalBaseline {
 
 struct PulseRate : public Vital {
   explicit PulseRate(float pulserate);
-  std::string getMessage(int category) const override;
-  friend std::string getPulseRateCategoryMessage(int category);
+  std::wstring getMessage(int category) const override;
+  friend std::wstring getPulseRateCategoryMessage(int category);
 };

@@ -9,7 +9,8 @@ enum class TemperatureCategory {
     NEAR_HYPO,
     NORMAL,
     NEAR_HYPER,
-    HYPERTHERMIA
+    HYPERTHERMIA,
+    COUNT_MAX
 };
 
 struct TemperatureBaseline : public VitalBaseline {
@@ -25,8 +26,8 @@ struct Temperature : public Vital {
   void normalizeMeasurement();
  public:
   explicit Temperature(float temperature, std::string units = "Fahrenheit");
-  std::string getMessage(int category) const override;
-  friend std::string getTemperatureCategoryMessage(int category);
+  std::wstring getMessage(int category) const override;
+  friend std::wstring getTemperatureCategoryMessage(int category);
 };
 
 

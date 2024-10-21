@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
 
-std::string getTemperatureCategoryMessage(int category);
-std::string getPulseRateCategoryMessage(int category);
-std::string getSPO2CategoryMessage(int category);
+std::wstring getTemperatureCategoryMessage(int category);
+std::wstring getPulseRateCategoryMessage(int category);
+std::wstring getSPO2CategoryMessage(int category);
