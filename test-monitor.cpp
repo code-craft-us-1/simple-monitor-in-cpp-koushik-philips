@@ -7,8 +7,10 @@
 // Pulse-rate ranges = {60, 61.5, 98.5, 100}
 // SpO2 ranges = {90, 91.5,98.5,100}
 
+Language  chosenLanguage(LANG::LANG_eng);
+
 TEST(Monitor, MonitorTemperature) {
-    Language::setLanguage(LANG::LANG_german);
+    chosenLanguage.setLanguage(LANG::LANG_german);
     // Individual checks and boundary-conditions
     ASSERT_FALSE(isTemperatureNormal(94));                    // Hypothermia
     ASSERT_FALSE(isTemperatureNormal(95.0f));                 // Near Hpothermia
@@ -23,7 +25,7 @@ TEST(Monitor, MonitorTemperature) {
 }
 
 TEST(Monitor, MonitorPulseRate) {
-    Language::setLanguage(LANG::LANG_eng);
+    chosenLanguage.setLanguage(LANG::LANG_eng);
     // Individual checks and boundary-conditions
     ASSERT_FALSE(isPulseRateNormal(59));                  // Bradycardia
     ASSERT_FALSE(isPulseRateNormal(60));                  // Near Bradycardia
@@ -36,7 +38,7 @@ TEST(Monitor, MonitorPulseRate) {
 }
 
 TEST(Monitor, MonitorSpo2) {
-    Language::setLanguage(LANG::LANG_german);
+    chosenLanguage.setLanguage(LANG::LANG_german);
     // Individual checks and boundary-conditions
     ASSERT_FALSE(isSPO2Normal(89));                       // Hypoaxemia
     ASSERT_FALSE(isSPO2Normal(90));                       // Near Hypoaxemia
@@ -49,7 +51,7 @@ TEST(Monitor, MonitorSpo2) {
 }
 
 TEST(Monitor, NotOkWhenAnyVitalIsOffRange) {
-  Language::setLanguage(LANG::LANG_eng);
+  chosenLanguage.setLanguage(LANG::LANG_eng);
   // check combinations
   ASSERT_FALSE(vitalsOk(99, 102, 70));      //  not-OK- 1 (T,P-out,S-out)
   ASSERT_FALSE(vitalsOk(103, 80, 94));      //  not-OK- 2 (T-out,P,S)

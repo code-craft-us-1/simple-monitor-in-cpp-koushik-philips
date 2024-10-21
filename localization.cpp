@@ -1,11 +1,16 @@
 #include <codecvt>
-#include <filesystem>
+//#include <filesystem>
 #include "./localization.h"
 
-std::string Language::sLocalePreference;
-std::string Language::sLocaleResource;
+//std::string Language::sLocalePreference;
+//std::string Language::sLocaleResource;
 Table Language::messageTable;
 
+Language::Language(LANG language):
+    sLocalePreference(),
+    sLocaleResource() {
+    setLanguage(language);
+}
 void Language::setLanguage(LANG language) {
     switch (language)
     {
@@ -23,7 +28,7 @@ void Language::setLanguage(LANG language) {
         {
             sLocalePreference = "en_US.UTF-8";
             sLocaleResource = "resource_eng.lang";
-            break; 
+            break;
         }
     }
     LoadResourceFile();
@@ -57,11 +62,11 @@ void Language::LoadResourceFile() {
     std::setlocale(LC_ALL, loc.name().c_str());
     filename = Language::getResource();
 
-    std::filesystem::path filePath(filename);
+   /* std::filesystem::path filePath(filename);
     std::filesystem::path folderPath = std::filesystem::path(__FILE__).remove_filename();
-    std::filesystem::path absoluteFilePath = std::filesystem::absolute(folderPath / filePath);
+    std::filesystem::path absoluteFilePath = std::filesystem::absolute(folderPath / filePath);*/
 
-    std::wifstream file(absoluteFilePath,std::ios::in);
+    std::wifstream file(filename/*absoluteFilePath*/,std::ios::in);
     file.imbue(loc);
     if (file.is_open()) {
         while (!file.eof()) {

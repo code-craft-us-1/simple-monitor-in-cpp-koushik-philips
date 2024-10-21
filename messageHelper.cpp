@@ -8,8 +8,10 @@
 #include "./spo2.h"
 #include "./localization.h"
 
+extern Language chosenLanguage;
+
 std::wstring getTemperatureCategoryMessage(int category) {
-  auto& lookUpTable = Language::getResourceTable();
+  auto& lookUpTable = chosenLanguage.getResourceTable();
   auto temperatureCategory = static_cast<TemperatureCategory>(category);
   switch (temperatureCategory) {
   case TemperatureCategory::HYPOTHERMIA:  return lookUpTable[L"TEMP_HYPOTHERMIA"];
@@ -25,7 +27,7 @@ std::wstring getTemperatureCategoryMessage(int category) {
 
 
 std::wstring getPulseRateCategoryMessage(int category) {
-  auto& lookUpTable = Language::getResourceTable();
+  auto& lookUpTable = chosenLanguage.getResourceTable();
   auto pulseRateCategory = static_cast<PulseRateCategory>(category);
   switch (pulseRateCategory) {
   case PulseRateCategory::BRADYCARDIA: return lookUpTable[L"PULSE_BRADYCARDIA"];
@@ -40,7 +42,7 @@ std::wstring getPulseRateCategoryMessage(int category) {
 }
 
 std::wstring getSPO2CategoryMessage(int category) {
-  auto& lookUpTable = Language::getResourceTable();
+  auto& lookUpTable = chosenLanguage.getResourceTable();
   auto spo2category = static_cast<SPO2Category>(category);
   switch (spo2category) {
   case SPO2Category::HYPOAXEMIA:        return lookUpTable[L"SPO2_HYPOAXEMIA"];
