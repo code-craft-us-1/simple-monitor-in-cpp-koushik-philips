@@ -12,8 +12,7 @@ Language::Language(LANG language):
     setLanguage(language);
 }
 void Language::setLanguage(LANG language) {
-    switch (language)
-    {
+    switch (language) {
         case LANG::LANG_eng: {
             sLocalePreference = "en_US.UTF-8";
             sLocaleResource = "resource_eng.lang";
