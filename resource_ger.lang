@@ -1,0 +1,15 @@
+TEMP_HYPOTHERMIA= Unterkühlung: Die Temperatur ist entscheidend!
+TEMP_NEAR_HYPO= Warnung: Unterkühlung droht
+TEMP_NORMAL= Normale Temperatur
+TEMP_NEAR_HYPER= Warnung: Hyperthermie naht
+TEMP_HYPERTHERMIA= Hyperthermie: Die Temperatur ist entscheidend!
+PULSE_BRADYCARDIA= Bradykardie: Pulsfrequenz liegt außerhalb des zulässigen Bereichs!
+PULSE_NEAR_BRADY= Warnung: Bradykardie naht
+PULSE_NORMAL= Normale Pulsfrequenz
+PULSE_NEAR_TACHY= Warnung: Kurz bevorstehende Tachykardie
+PULSE_TACHYCARDIA= Tachykardie: Pulsfrequenz liegt außerhalb des zulässigen Bereichs!
+SPO2_HYPOAXEMIA= Hypoaxämie: Sauerstoffsättigung außerhalb des zulässigen Bereichs!
+SPO2_NEAR_HYPOAXEMIA= Warnung: Annäherung an eine Hypoaxämie
+SPO2_NORMAL= Normale Sauerstoffsättigung
+SPO2_NEAR_HYPEROAXEMIA= Warnung: Hyperaxämie naht
+SPO2_HYPEROAXEMIA= Hyperaxämie: Sauerstoffsättigung außerhalb des zulässigen Bereichs!
