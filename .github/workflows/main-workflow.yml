@@ -20,6 +20,9 @@ jobs:
     - name: run command
       run: locale -a
 
+    - name: run special
+      run: sudo update-locale LANG=de_DE.UTF-8 LANGUAGE= LC_MESSAGES= LC_COLLATE= LC_CTYPE=
+
     - name: install coverage tool
       run: |
         sudo apt-get update
