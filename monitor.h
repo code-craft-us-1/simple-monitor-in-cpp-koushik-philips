@@ -9,7 +9,8 @@
 bool vitalsOk(float temperature, float pulseRate, float spo2);
 bool vitalsOk(Temperature temperature, PulseRate pulseRate, SPO2 spo2);
 bool vitalsOk(std::vector< std::shared_ptr<Vital> > vitals);
-bool CheckTemperatureVital(float temperature, std::string units = "Fahrenheit");
-bool CheckPulseRateVital(float pulseRate);
-bool CheckSPO2Vital(float spo2);
-bool checkVital(const Vital& vital);
+bool isVitalNormal(std::shared_ptr<Vital> spVital);
+bool isTemperatureNormal(float temperature, std::string units = "Fahrenheit");
+bool isPulseRateNormal(float pulseRate);
+bool isSPO2Normal(float spo2);
+bool isVitalNormal(const Vital& vital);
