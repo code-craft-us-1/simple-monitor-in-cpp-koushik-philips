@@ -52,4 +52,8 @@ Shorten the Semantic distance
 Following extensions have been supported:
 
 Extension 1: Early Warning  
-Extension 3: Accept input in different units
+Extension 2: Support a language in addition to English - German support  
+Extension 3: Accept input in different units  
+
+# Screenshot
+![alt text](MultiLangSupport.PNG)
