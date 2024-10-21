@@ -16,12 +16,10 @@ jobs:
         sudo locale-gen
         sudo update-locale
         sudo dpkg-reconfigure locales
+        sudo update-locale LANG=de_DE.UTF-8 LC_ALL=$LANG
 
     - name: run command
       run: locale -a
-
-    - name: run special
-      run: sudo update-locale LANG=de_DE.UTF-8 LANGUAGE= LC_MESSAGES= LC_COLLATE= LC_CTYPE=
 
     - name: install coverage tool
       run: |
