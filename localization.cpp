@@ -1,9 +1,9 @@
 #include <codecvt>
-//#include <filesystem>
+#include <string>
+#include <utility>
+#include <iostream>
 #include "./localization.h"
 
-//std::string Language::sLocalePreference;
-//std::string Language::sLocaleResource;
 Table Language::messageTable;
 
 Language::Language(LANG language):
@@ -24,8 +24,7 @@ void Language::setLanguage(LANG language) {
             sLocaleResource = "resource_ger.lang";
             break;
         }
-        default:
-        {
+        default: {
             sLocalePreference = "en_US.UTF-8";
             sLocaleResource = "resource_eng.lang";
             break;
@@ -66,7 +65,7 @@ void Language::LoadResourceFile() {
     std::filesystem::path folderPath = std::filesystem::path(__FILE__).remove_filename();
     std::filesystem::path absoluteFilePath = std::filesystem::absolute(folderPath / filePath);*/
 
-    std::wifstream file(filename/*absoluteFilePath*/,std::ios::in);
+    std::wifstream file(filename/*absoluteFilePath*/, std::ios::in);
     file.imbue(loc);
     if (file.is_open()) {
         while (!file.eof()) {

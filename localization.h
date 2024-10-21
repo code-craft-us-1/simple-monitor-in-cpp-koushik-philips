@@ -20,16 +20,15 @@ enum class LANG {
 };
 
 struct Language {
-    //Language() = delete;
-    Language(LANG language);
-    /*static*/ Table& getResourceTable();
-    /*static*/ void setLanguage(LANG language);
-    /*static*/ std::string getLanguage();
+    explicit Language(LANG language);
+    Table& getResourceTable();
+    void setLanguage(LANG language);
+    std::string getLanguage();
  private:
-    /*static*/ std::string sLocalePreference;
-    /*static*/ std::string sLocaleResource;
+    std::string sLocalePreference;
+    std::string sLocaleResource;
     static Table messageTable;
-    /*static*/ std::string getResource();
-    /*static*/ void LoadLocalePreference();
-    /*static*/ void LoadResourceFile();
+    std::string getResource();
+    void LoadLocalePreference();
+    void LoadResourceFile();
 };
