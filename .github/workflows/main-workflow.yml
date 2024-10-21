@@ -10,6 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: install and setup language pack
+      run: |
+        sudo apt-get install language-pack-de
+        sudo locale-gen
+        sudo update-locale
+
     - name: run command
       run: locale -a
 
