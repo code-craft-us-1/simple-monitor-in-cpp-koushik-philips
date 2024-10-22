@@ -13,20 +13,19 @@ Language::Language(LANG language):
 }
 void Language::setLanguage(LANG language) {
     switch (language) {
-        case LANG::LANG_eng: {
+        case LANG::ENGLISH: {
             sLocalePreference = "en_US.UTF-8";
             sLocaleResource = "resource_eng.lang";
             break;
         }
-        case LANG::LANG_german: {
+        case LANG::GERMAN: {
             //  sLocalePreference = "De_DE";
             sLocalePreference = "de_DE.UTF-8";
             sLocaleResource = "resource_ger.lang";
             break;
         }
         default: {
-            sLocalePreference = "en_US.UTF-8";
-            sLocaleResource = "resource_eng.lang";
+            LoadLocalePreference();
             break;
         }
     }
@@ -42,8 +41,20 @@ std::string Language::getResource() {
 }
 
 void Language::LoadLocalePreference() {
+    std::string sIndex;
+    std::string sPreferredLocale;
     std::ifstream file("localization.cfg");
-    std::getline(file, sLocalePreference);
+    if (file.is_open()) {
+        std::getline(file, sPreferredLocale);
+        std::stringstream strStream(sPreferredLocale);
+        strStream >> sIndex;
+        if (sIndex == "PREFFERED") {
+            strStream >> sLocalePreference >> sLocaleResource;
+        } else {
+            sLocalePreference = "en_US.UTF-8";
+            sLocaleResource = "resource_eng.lang";
+        }
+    }
     file.close();
     return;
 }
@@ -61,11 +72,7 @@ void Language::LoadResourceFile() {
     std::setlocale(LC_ALL, loc.name().c_str());
     filename = Language::getResource();
 
-   /* std::filesystem::path filePath(filename);
-    std::filesystem::path folderPath = std::filesystem::path(__FILE__).remove_filename();
-    std::filesystem::path absoluteFilePath = std::filesystem::absolute(folderPath / filePath);*/
-
-    std::wifstream file(filename/*absoluteFilePath*/, std::ios::in);
+    std::wifstream file(filename, std::ios::in);
     file.imbue(loc);
     if (file.is_open()) {
         while (!file.eof()) {

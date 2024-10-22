@@ -7,10 +7,10 @@
 // Pulse-rate ranges = {60, 61.5, 98.5, 100}
 // SpO2 ranges = {90, 91.5,98.5,100}
 
-Language  chosenLanguage(LANG::LANG_eng);
+Language  chosenLanguage(LANG::NONE);
 
 TEST(Monitor, MonitorTemperature) {
-    chosenLanguage.setLanguage(LANG::LANG_german);
+    chosenLanguage.setLanguage(LANG::GERMAN);
     // Individual checks and boundary-conditions
     ASSERT_FALSE(isTemperatureNormal(94));                    // Hypothermia
     ASSERT_FALSE(isTemperatureNormal(95.0f));                 // Near Hpothermia
@@ -25,7 +25,7 @@ TEST(Monitor, MonitorTemperature) {
 }
 
 TEST(Monitor, MonitorPulseRate) {
-    chosenLanguage.setLanguage(LANG::LANG_eng);
+    chosenLanguage.setLanguage(LANG::ENGLISH);
     // Individual checks and boundary-conditions
     ASSERT_FALSE(isPulseRateNormal(59));                  // Bradycardia
     ASSERT_FALSE(isPulseRateNormal(60));                  // Near Bradycardia
@@ -38,7 +38,7 @@ TEST(Monitor, MonitorPulseRate) {
 }
 
 TEST(Monitor, MonitorSpo2) {
-    chosenLanguage.setLanguage(LANG::LANG_german);
+    chosenLanguage.setLanguage(LANG::GERMAN);
     // Individual checks and boundary-conditions
     ASSERT_FALSE(isSPO2Normal(89));                       // Hypoaxemia
     ASSERT_FALSE(isSPO2Normal(90));                       // Near Hypoaxemia
@@ -51,7 +51,7 @@ TEST(Monitor, MonitorSpo2) {
 }
 
 TEST(Monitor, NotOkWhenAnyVitalIsOffRange) {
-  chosenLanguage.setLanguage(LANG::LANG_eng);
+  chosenLanguage.setLanguage(LANG::ENGLISH);
   // check combinations
   ASSERT_FALSE(vitalsOk(99, 102, 70));      //  not-OK- 1 (T,P-out,S-out)
   ASSERT_FALSE(vitalsOk(103, 80, 94));      //  not-OK- 2 (T-out,P,S)
@@ -76,3 +76,25 @@ TEST(Monitor, MonitorAllPossibleVitalCombos) {
     ASSERT_TRUE(vitalsOk({ std::make_shared <Temperature>(36.5f, "Celsius"),
                            std::make_shared <SPO2>(91.6f)}));
 }
+
+TEST(Monitor, TemperatureWithUnits) {
+    ASSERT_TRUE(isTemperatureNormal(37.f, "Celsius"));
+    ASSERT_TRUE(vitalsOk({ std::make_shared <Temperature>(36.5f, "Celsius"),
+                           std::make_shared <SPO2>(91.6f) }));
+}
+
+TEST(Monitor, DisplayMessageInGerman) {
+    chosenLanguage.setLanguage(LANG::GERMAN);
+    ASSERT_TRUE(vitalsOk(98.1f, 70, 98));
+}
+
+TEST(Monitor, DisplayMessageInEnglish) {
+    chosenLanguage.setLanguage(LANG::ENGLISH);
+    ASSERT_TRUE(vitalsOk(98.1f, 70, 98));
+}
+
+TEST(Monitor, DisplayMessageInLanguage_chosenFromConfig) {
+    chosenLanguage.setLanguage(LANG::NONE);
+    ASSERT_TRUE(vitalsOk(98.1f, 70, 98));
+}
+

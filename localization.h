@@ -14,9 +14,9 @@ using LocalizedMessage = std::wstring;
 using Table = std::map<MessageID, LocalizedMessage>;
 
 enum class LANG {
-    LANG_eng,
-    LANG_german,
-    LANG_COUNT
+    ENGLISH,
+    GERMAN,
+    NONE
 };
 
 struct Language {
