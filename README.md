@@ -12,7 +12,6 @@ Extension 3: Accept input in different units
 # Screenshot - 2
 ![alt text](MultiLangSupportUbuntu.PNG)
 
-:---------
 
 # Programming Paradigms
 
