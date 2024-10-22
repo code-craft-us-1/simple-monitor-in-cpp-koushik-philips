@@ -79,22 +79,22 @@ TEST(Monitor, MonitorAllPossibleVitalCombos) {
 
 TEST(Monitor, TemperatureWithUnits) {
     ASSERT_TRUE(isTemperatureNormal(37.f, "Celsius"));
-    ASSERT_TRUE(vitalsOk({ std::make_shared <Temperature>(36.5f, "Celsius"),
-                           std::make_shared <SPO2>(91.6f) }));
+    ASSERT_TRUE(vitalsOk({ std::make_shared <Temperature>(37.f, "Celsius"),
+                           std::make_shared <SPO2>(94.5f) }));
 }
 
 TEST(Monitor, DisplayMessageInGerman) {
     chosenLanguage.setLanguage(LANG::GERMAN);
-    ASSERT_TRUE(vitalsOk(98.1f, 70, 98));
+    ASSERT_TRUE(vitalsOk(98.6f, 80, 97));
 }
 
 TEST(Monitor, DisplayMessageInEnglish) {
     chosenLanguage.setLanguage(LANG::ENGLISH);
-    ASSERT_TRUE(vitalsOk(98.1f, 70, 98));
+    ASSERT_TRUE(vitalsOk(98.5f, 82, 97));
 }
 
 TEST(Monitor, DisplayMessageInLanguage_chosenFromConfig) {
     chosenLanguage.setLanguage(LANG::NONE);
-    ASSERT_TRUE(vitalsOk(98.1f, 70, 98));
+    ASSERT_TRUE(vitalsOk(97.5f, 70, 96));
 }
 
