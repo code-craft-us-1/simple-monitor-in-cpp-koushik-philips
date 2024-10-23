@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <map>
 #include "./vital.h"
 
 // Number of categories = number of 'levels' + 1
