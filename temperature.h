@@ -4,9 +4,9 @@
 #include "./vital.h"
 
 namespace TEMPERATURE_CONSTANTS {
-    constexpr float TEMP_LIMIT_HIGH = 102;
-    constexpr float TEMP_LIMIT_LOW = 95;
-    constexpr float TEMP_TOLERANCE_PERCENT = 1.5;
+constexpr float TEMP_LIMIT_HIGH = 102;
+constexpr float TEMP_LIMIT_LOW = 95;
+constexpr float TEMP_TOLERANCE_PERCENT = 1.5;
 }
 using MessageID = std::wstring;
 

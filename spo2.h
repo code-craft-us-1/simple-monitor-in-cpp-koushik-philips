@@ -4,9 +4,9 @@
 #include "./vital.h"
 
 namespace SPO2_CONSTANTS {
-    constexpr float SPO2_LIMIT_LOW = 90;
-    constexpr float SPO2_LIMIT_HIGH = 100;
-    constexpr float SPO2_TOLERANCE_PERCENT = 1.5;
+constexpr float SPO2_LIMIT_LOW = 90;
+constexpr float SPO2_LIMIT_HIGH = 100;
+constexpr float SPO2_TOLERANCE_PERCENT = 1.5;
 }
 using MessageID = std::wstring;
 
