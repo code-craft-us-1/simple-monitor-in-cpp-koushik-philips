@@ -1,3 +1,18 @@
+# Extending and Refactoring
+
+Following extensions have been supported:
+
+Extension 1: Early Warning  
+Extension 2: Support a language in addition to English - German support  
+Extension 3: Accept input in different units  
+
+# Screenshot - 1
+![alt text](MultiLangSupport.PNG)
+
+# Screenshot - 2
+![alt text](MultiLangSupportUbuntu.PNG)
+
+
 # Programming Paradigms
 
 Health Monitoring Systems
@@ -46,3 +61,6 @@ Shorten the Semantic distance
 - Functional to express relation between input and output
 - Object oriented to encapsulate state with actions
 - Apect oriented to capture repeating aspects
+
+
+

@@ -1,0 +1,15 @@
+TEMP_HYPOTHERMIA= Hypothermia : Temperature is critical!
+TEMP_NEAR_HYPO= Warning: Approaching hypothermia
+TEMP_NORMAL= Normal Temperature
+TEMP_NEAR_HYPER= Warning: Approaching hyperthermia
+TEMP_HYPERTHERMIA= Hyperthermia : Temperature is critical!
+PULSE_BRADYCARDIA= Bradycardia : Pulse Rate is out of range!
+PULSE_NEAR_BRADY= Warning: Approaching bradycardia
+PULSE_NORMAL= Normal pulse rate
+PULSE_NEAR_TACHY= Warning: Approaching tachycardia
+PULSE_TACHYCARDIA= Tachycardia : Pulse Rate is out of range!
+SPO2_HYPOAXEMIA= Hypoaxemia : Oxygen Saturation out of range!
+SPO2_NEAR_HYPOAXEMIA= Warning: Approaching hypoaxemia
+SPO2_NORMAL= Normal oxygen saturation
+SPO2_NEAR_HYPEROAXEMIA= Warning: Approaching hyperoaxemia
+SPO2_HYPEROAXEMIA= Hyperoaxemia : Oxygen Saturation out of range!
