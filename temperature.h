@@ -1,7 +1,9 @@
 #pragma once
-#include <set>
 #include <string>
+#include <map>
 #include "./vital.h"
+
+using MessageID = std::wstring;
 
 // Number of categories = number of 'levels' + 1
 enum class TemperatureCategory {
@@ -22,12 +24,13 @@ struct TemperatureBaseline : public VitalBaseline {
 
 struct Temperature : public Vital {
  private:
+  std::map<TemperatureCategory, MessageID> messageMap;
   std::string measurementUnits;
   void normalizeMeasurement();
+  void initTemperatureMessageMap();
  public:
   explicit Temperature(float temperature, std::string units = "Fahrenheit");
   std::wstring getMessage(int category) const override;
-  friend std::wstring getTemperatureCategoryMessage(int category);
 };
 
 

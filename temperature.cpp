@@ -1,8 +1,8 @@
-#include <set>
 #include <string>
+#include "./localization.h"
 #include "./temperature.h"
 
-extern std::wstring getTemperatureCategoryMessage(int category);
+extern Language chosenLanguage;
 
 namespace {
 constexpr float TEMP_LIMIT_HIGH = 102;
@@ -16,6 +16,7 @@ Temperature::Temperature(float temperature, std::string units) :
                                             TEMP_TOLERANCE_PERCENT)),
     measurementUnits(units) {
     normalizeMeasurement();
+    initTemperatureMessageMap();
 }
 
 void Temperature::normalizeMeasurement() {
@@ -24,7 +25,17 @@ void Temperature::normalizeMeasurement() {
     }
 }
 
-//  Moved code to 'messageHelper.cpp' for conforming to CCN=3
 std::wstring Temperature::getMessage(int category) const {
-    return getTemperatureCategoryMessage(category);
+    auto& lookUpTable = chosenLanguage.getResourceTable();
+    auto temperatureCategory = static_cast<TemperatureCategory>(category);
+    auto messageId = messageMap.at(temperatureCategory);
+    return lookUpTable[messageId];
+}
+
+void Temperature::initTemperatureMessageMap() {
+  messageMap.insert(std::make_pair(TemperatureCategory::HYPOTHERMIA, L"TEMP_HYPOTHERMIA"));
+  messageMap.insert(std::make_pair(TemperatureCategory::NEAR_HYPO, L"TEMP_NEAR_HYPO"));
+  messageMap.insert(std::make_pair(TemperatureCategory::NORMAL, L"TEMP_NORMAL"));
+  messageMap.insert(std::make_pair(TemperatureCategory::NEAR_HYPER, L"TEMP_NEAR_HYPER"));
+  messageMap.insert(std::make_pair(TemperatureCategory::HYPERTHERMIA, L"TEMP_HYPERTHERMIA"));
 }

@@ -1,7 +1,9 @@
 #pragma once
-#include <set>
 #include <string>
+#include <map>
 #include "./vital.h"
+
+using MessageID = std::wstring;
 
 // Number of categories = number of 'levels' + 1
 enum class PulseRateCategory {
@@ -21,7 +23,10 @@ struct PulseRateBaseline : public VitalBaseline {
 };
 
 struct PulseRate : public Vital {
+ private:
+  std::map<PulseRateCategory, MessageID> messageMap;
+  void initPulseRateMessageMap();
+ public:
   explicit PulseRate(float pulserate);
   std::wstring getMessage(int category) const override;
-  friend std::wstring getPulseRateCategoryMessage(int category);
 };

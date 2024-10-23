@@ -1,5 +1,4 @@
 #pragma once
-#include <set>
 #include <string>
 #include "./vital.h"
 
@@ -21,7 +20,10 @@ struct SPO2Baseline : public VitalBaseline {
 };
 
 struct SPO2 : public Vital {
+ private:
+  std::map<SPO2Category, MessageID> messageMap;
+  void initSPO2MessageMap();
+ public:
   explicit SPO2(float spo2);
   std::wstring getMessage(int category) const override;
-  friend std::wstring getSPO2CategoryMessage(int category);
 };

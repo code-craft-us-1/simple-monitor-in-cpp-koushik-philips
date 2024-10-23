@@ -67,10 +67,16 @@ void Language::LoadResourceFile() {
     std::wstring sValue;
     std::string filename;
 
+    //  use this for std::wifstream
     std::string slocale = Language::getLanguage();
     loc = std::locale(std::locale(slocale), new std::codecvt_utf8<wchar_t>);
     std::setlocale(LC_ALL, loc.name().c_str());
     filename = Language::getResource();
+
+    //  use this for std::wcout
+    std::locale nLoc = std::locale(slocale);
+    std::setlocale(LC_ALL, nLoc.name().c_str());
+    std::wcout.imbue(loc);
 
     std::wifstream file(filename, std::ios::in);
     file.imbue(loc);
@@ -82,11 +88,6 @@ void Language::LoadResourceFile() {
             std::getline(strStream, sKey, L'=');
             std::getline(strStream, sValue);
             messageTable.insert(std::make_pair(sKey, sValue));
-
-            std::locale nLoc = std::locale(slocale);
-            std::setlocale(LC_ALL, nLoc.name().c_str());
-            std::locale::global(nLoc);
-            std::wcout.imbue(nLoc);
         }
     }
     file.close();
