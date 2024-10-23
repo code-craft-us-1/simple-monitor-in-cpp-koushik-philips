@@ -7,7 +7,7 @@ bool isVitalNormal(const Vital& vital) {
     auto category = vital.getCategory();
     auto msg = vital.getMessage(category);
     vital.displayMessage(msg);
-    // vital.displayTransitionGraphics();
+    vital.displayTransitionGraphics();
     return vital.isVitalOk(category);
 }
 
@@ -16,7 +16,7 @@ bool isVitalNormal(std::shared_ptr<Vital> spVital) {
     auto category = spVital->getCategory();
     auto msg = spVital->getMessage(category);
     spVital->displayMessage(msg);
-    // spVital->displayTransitionGraphics();
+    spVital->displayTransitionGraphics();
     return spVital->isVitalOk(category);
 }
 

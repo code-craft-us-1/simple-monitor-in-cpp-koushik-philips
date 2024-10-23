@@ -3,6 +3,11 @@
 #include <map>
 #include "./vital.h"
 
+namespace PULSERATE_CONSTANTS {
+    constexpr float PULSE_LIMIT_HIGH = 100;
+    constexpr float PULSE_LIMIT_LOW = 60;
+    constexpr float PULSE_TOLERANCE_PERCENT = 1.5;
+}
 using MessageID = std::wstring;
 
 // Number of categories = number of 'levels' + 1

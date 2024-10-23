@@ -5,11 +5,9 @@
 
 extern Language chosenLanguage;
 
-namespace {
-constexpr float TEMP_LIMIT_HIGH = 102;
-constexpr float TEMP_LIMIT_LOW = 95;
-constexpr float TEMP_TOLERANCE_PERCENT = 1.5;
-}
+using TEMPERATURE_CONSTANTS::TEMP_LIMIT_HIGH;
+using TEMPERATURE_CONSTANTS::TEMP_LIMIT_LOW;
+using TEMPERATURE_CONSTANTS::TEMP_TOLERANCE_PERCENT;
 
 Temperature::Temperature(float temperature, std::string units) :
     Vital(temperature,

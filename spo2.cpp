@@ -5,11 +5,9 @@
 
 extern Language chosenLanguage;
 
-namespace {
-constexpr float SPO2_LIMIT_LOW = 90;
-constexpr float SPO2_LIMIT_HIGH = 100;
-constexpr float SPO2_TOLERANCE_PERCENT = 1.5;
-}
+using SPO2_CONSTANTS::SPO2_LIMIT_LOW;
+using SPO2_CONSTANTS::SPO2_LIMIT_HIGH;
+using SPO2_CONSTANTS::SPO2_TOLERANCE_PERCENT;
 
 SPO2::SPO2(float spo2) :
     Vital(spo2,

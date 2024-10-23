@@ -5,11 +5,9 @@
 
 extern Language chosenLanguage;
 
-namespace {
-constexpr float PULSE_LIMIT_HIGH = 100;
-constexpr float PULSE_LIMIT_LOW = 60;
-constexpr float PULSE_TOLERANCE_PERCENT = 1.5;
-}
+using PULSERATE_CONSTANTS::PULSE_LIMIT_LOW;
+using PULSERATE_CONSTANTS::PULSE_LIMIT_HIGH;
+using PULSERATE_CONSTANTS::PULSE_TOLERANCE_PERCENT;
 
 PulseRate::PulseRate(float pulserate) :
     Vital(pulserate,
